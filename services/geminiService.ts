@@ -6,8 +6,9 @@ import { RESUME_CONTEXT } from "../constants";
 // but for a personal portfolio client-side demo, this works if restrictions are set on the key.
 let ai: GoogleGenAI | null = null;
 
-// Safely check for process.env to avoid ReferenceError in non-Node environments
-const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : undefined;
+const apiKey = process.env.API_KEY || '';
+
+const MODEL_NAME = 'gemini-2.5-flash';
 
 if (apiKey) {
   ai = new GoogleGenAI({ apiKey: apiKey });
