@@ -34,8 +34,8 @@ export const PROFILE = {
   whatsapp: "https://wa.me/+573001244352",
   location: "Cartagena, Colombia",
   telefono: "+57 3001244352",
-  photoUrl: "/public/foto-portfolio-r.png", 
-  cv: "./public/EDUARDONAVARRO2025_CV.pdf"
+  photoUrl: "/foto-portfolio-r.png", 
+  cv: "/EDUARDONAVARRO2025_CV.pdf"
 };
 
 // --- SKILLS ---
