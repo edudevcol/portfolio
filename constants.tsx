@@ -35,7 +35,7 @@ export const PROFILE = {
   location: "Cartagena, Colombia",
   telefono: "+57 3001244352",
   photoUrl: "/public/foto-portfolio-r.png", 
-  cv: "/public/EDUARDONAVARRO2025_CV.pdf"
+  cv: "./public/EDUARDONAVARRO2025_CV.pdf"
 };
 
 // --- SKILLS ---
