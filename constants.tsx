@@ -34,7 +34,7 @@ export const PROFILE = {
   whatsapp: "https://wa.me/+573001244352",
   location: "Cartagena, Colombia",
   telefono: "+57 3001244352",
-  photoUrl: "/foto-portfolio-r.png", 
+  photoUrl: "/foto-portfolio-r.png",
   cv: "/EDUARDONAVARRO2025_CV.pdf"
 };
 
@@ -65,34 +65,47 @@ export const SKILLS: Skill[] = [
 export const INITIAL_PROJECTS: Project[] = [
   {
     id: "1",
-    title: "AI Test Data Generator",
-    shortDescription: "Generador de datos de prueba sintéticos utilizando modelos LLM.",
-    fullDescription: "Una aplicación full-stack que permite a los equipos de QA generar grandes volúmenes de datos de prueba realistas pero anónimos utilizando la API de Gemini. Resuelve el problema de la privacidad de datos en entornos de staging.",
-    technologies: ["React", "Node.js", "Gemini API", "MongoDB"],
-    image: "https://picsum.photos/800/600?random=1",
-    repoUrl: "https://github.com/alexdev/ai-test-gen",
-    features: ["Generación de JSON/CSV", "Schemas personalizables", "Validación de tipos de datos", "Exportación masiva"]
+    title: "AI Test Case Generator",
+    shortDescription: "Generador automático de casos de prueba impulsado por IA y exportación a Jira.",
+    fullDescription: "Aplicación que permite a equipos de QA generar casos de prueba detallados a partir de requisitos o historias de usuario utilizando modelos LLM. Reduce el tiempo de análisis manual y garantiza una mejor cobertura funcional.",
+    technologies: ["React", "Jira", "Gemini AI", "Express", "Node.js"],
+    image: "./ai-test-case-generator.png",
+    demoUrl: "https://ai-test-cases-generator-bay.vercel.app",
+    repoUrl: "https://github.com/edudevcol/ai-test-cases-generator",
+    features: [
+      "Generación de casos de prueba funcionales",
+      "Derivación de escenarios alternos",
+      "Exportación automática a Jira",
+      "Clasificación por prioridad y tipo de prueba"
+    ]
   },
   {
     id: "2",
-    title: "E-commerce Automation Suite",
-    shortDescription: "Framework de automatización escalable para plataformas de comercio electrónico.",
-    fullDescription: "Un framework robusto construido con Playwright y TypeScript que implementa el patrón Page Object Model. Cubre flujos críticos como checkout, búsqueda y gestión de usuarios, ejecutándose diariamente en Jenkins.",
-    technologies: ["Playwright", "TypeScript", "Jenkins", "Docker"],
-    image: "https://picsum.photos/800/600?random=2",
-    repoUrl: "https://github.com/alexdev/ecommerce-auto",
-    features: ["Reportes HTML detallados", "Ejecución paralela", "Capturas de pantalla en fallo", "Integración con Slack"]
-  },
-  {
+    title: "AI Script Generator Playwright",
+    shortDescription: "Generador inteligente de scripts automatizados usando Playwright y modelos LLM.",
+    fullDescription: "Una herramienta impulsada por IA que genera scripts de automatización Playwright basados en descripciones en lenguaje natural. Ideal para testers que quieren acelerar la creación de casos de prueba E2E sin escribir código desde cero.",
+    technologies: ["Playwright", "TypeScript", "LLM", "OpenAI/Gemini"],
+    image: "./playwright.png",
+    demoUrl: "https://playwright-ai-wlz9.vercel.app",
+    repoUrl: "https://github.com/edudevcol/playwright-ai",
+    features: [
+      "Generación automática de scripts",
+      "Conversión de texto a pasos E2E",
+      "Integración con Page Object Model",
+      "Sugerencias inteligentes de selectores"
+    ]
+  }, {
     id: "3",
-    title: "Bug Tracker Dashboard",
-    shortDescription: "Dashboard visual para seguimiento de defectos e integración con Jira.",
-    fullDescription: "Interfaz de usuario moderna para visualizar métricas de calidad en tiempo real. Se conecta a la API de Jira para mostrar tendencias de bugs, tiempo de resolución y cobertura de pruebas por sprint.",
-    technologies: ["React", "Chart.js", "Jira API", "Express"],
-    image: "https://picsum.photos/800/600?random=3",
-    demoUrl: "https://bugtracker-demo.com",
-    features: ["Gráficos interactivos", "Filtros avanzados", "Modo oscuro", "Alertas de umbral de bugs"]
+    title: "AI Test Data Generator",
+    shortDescription: "Generador de datos de prueba sintéticos utilizando modelos LLM.",
+    fullDescription: "Una aplicación full-stack que permite a los equipos de QA generar grandes volúmenes de datos de prueba realistas pero anónimos utilizando la API de Gemini. Resuelve el problema de la privacidad de datos en entornos de staging.",
+    technologies: ["React", "Node.js", "Gemini AI", "JSON"],
+    image: "./tdm.png",
+    demoUrl: "https://tdm-generator-ai.vercel.app",
+    repoUrl: "https://github.com/edudevcol/tdm-generator-ai",
+    features: ["Generación de JSON/CSV", "Schemas personalizables", "Validación de tipos de datos", "Exportación masiva"]
   }
+
 ];
 
 // --- EXPERIENCE ---
