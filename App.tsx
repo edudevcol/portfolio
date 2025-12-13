@@ -8,6 +8,8 @@ import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Chatbot from './components/Chatbot';
 import FadeInSection from './components/FadeInSection';
+import { Analytics } from "@vercel/analytics/react";
+
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
 
       {/* AI Assistant fixed at bottom-right */}
       <Chatbot />
+
+      <Analytics />
     </div>
   );
 }
