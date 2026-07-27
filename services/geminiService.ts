@@ -28,7 +28,6 @@ export const sendMessageToGemini = async (
     // We use a fresh generation for each turn to keep it simple and stateless regarding the session,
     // manually appending history to the prompt or using the chat helper.
     // Here, let's use the Chat helper for better context management.
-    
     const chat = ai.chats.create({
       model: 'gemini-2.5-flash',
       config: {
@@ -46,7 +45,6 @@ export const sendMessageToGemini = async (
     });
 
     return result.text || "No pude generar una respuesta.";
-    
   } catch (error) {
     console.error("Error calling Gemini:", error);
     return "Hubo un error al procesar tu pregunta. Por favor intenta de nuevo.";

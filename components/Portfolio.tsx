@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { INITIAL_PROJECTS, Icons } from '../constants';
 import { Project } from '../types';
 import ProjectModal from './ProjectModal';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Portfolio: React.FC = () => {
+  const { t } = useLanguage();
+  const portfolioTranslations = t('portfolio');
+  
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   
@@ -98,8 +102,8 @@ const Portfolio: React.FC = () => {
     <section id="portfolio" className="py-20 bg-slate-900 relative">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center mb-16 relative">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Proyectos</h2>
-          <p className="text-slate-400 text-center">Una selección de mi trabajo reciente</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{portfolioTranslations.title}</h2>
+          <p className="text-slate-400 text-center">{portfolioTranslations.subtitle}</p>
           
           {/* Admin Toggle (Hidden/Small for Portfolio feel) */}
           <div className="absolute right-0 top-0 hidden md:block">

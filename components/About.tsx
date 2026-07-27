@@ -1,14 +1,18 @@
 import React from 'react';
 import { EDUCATION, PROFILE, Icons } from '../constants';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const About: React.FC = () => {
+  const { t } = useLanguage();
+  const aboutTranslations = t('about');
+  
   return (
     <section id="about" className="py-20 bg-slate-850">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 border-l-4 border-primary-500 pl-4">
-              Acerca de mí
+              {aboutTranslations.title}
             </h2>
             <p className="text-slate-400 text-lg leading-relaxed mb-6">
               Soy un profesional apasionado por la calidad del software, la automatización y la mejora continua. Me desenvuelvo tanto en QA como en desarrollo web, lo que me permite comprender el ciclo de vida completo de una aplicación. Aseguro que los productos sean robustos, escalables y confiables, combinando prácticas avanzadas de pruebas con herramientas modernas de automatización.

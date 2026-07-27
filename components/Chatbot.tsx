@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Icons } from '../constants';
 import { ChatMessage } from '../types';
-import { sendMessageToGemini } from '../services/geminiService';
-import { logChatInteraction } from '../services/chatLogger';
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,30 +42,22 @@ const Chatbot: React.FC = () => {
       timestamp: new Date()
     };
 
-    // Log user message
-    logChatInteraction(userMsg);
-
     setMessages(prev => [...prev, userMsg]);
     setInputText('');
     setIsLoading(true);
 
-    // Prepare history for API (exclude init message if strictly needed, but init is fine)
-    const historyForApi = messages.map(m => ({ role: m.role, text: m.text }));
+    // Simular respuesta del bot (el chatbot está deshabilitado temporalmente)
+    setTimeout(() => {
+      const aiMsg: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'model',
+        text: 'El chatbot de texto está temporalmente deshabilitado. Por favor usa el ávatar de voz interactivo en la sección de avatar para hacer preguntas en tiempo real.',
+        timestamp: new Date()
+      };
 
-    const aiResponseText = await sendMessageToGemini(userMsg.text, historyForApi);
-
-    const aiMsg: ChatMessage = {
-      id: (Date.now() + 1).toString(),
-      role: 'model',
-      text: aiResponseText,
-      timestamp: new Date()
-    };
-
-    // Log AI message
-    logChatInteraction(aiMsg);
-
-    setMessages(prev => [...prev, aiMsg]);
-    setIsLoading(false);
+      setMessages(prev => [...prev, aiMsg]);
+      setIsLoading(false);
+    }, 1000);
   };
 
   const handleClear = (e: React.MouseEvent) => {

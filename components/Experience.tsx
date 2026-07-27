@@ -1,11 +1,15 @@
 import React from 'react';
 import { EXPERIENCE } from '../constants';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Experience: React.FC = () => {
+  const { t } = useLanguage();
+  const experienceTranslations = t('experience');
+  
   return (
     <section id="experience" className="py-20 bg-slate-850">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Curriculum</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">{experienceTranslations.title}</h2>
         
         <div className="max-w-3xl mx-auto">
           {EXPERIENCE.map((item, index) => (

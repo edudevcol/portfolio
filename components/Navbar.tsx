@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { PROFILE } from '../constants';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -10,13 +12,16 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navTranslations = t('nav');
+
   const navLinks = [
-    { name: 'Dashboard', href: '#dashboard' },
-    { name: 'Acerca de mí', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Curriculum', href: '#experience' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contacto', href: '#contact' },
+    { name: navTranslations.dashboard, href: '#dashboard' },
+    { name: navTranslations.avatar, href: '#avatar', isBadge: true },
+    { name: navTranslations.about, href: '#about' },
+    { name: navTranslations.skills, href: '#skills' },
+    { name: navTranslations.resume, href: '#experience' },
+    { name: navTranslations.portfolio, href: '#portfolio' },
+    { name: navTranslations.contact, href: '#contact' },
   ];
 
   return (
@@ -26,17 +31,30 @@ const Navbar: React.FC = () => {
           {"edu".replace(' ', '').toLowerCase()}<span className="text-white">dev</span>
         </a>
         
-        <ul className="hidden md:flex space-x-8">
+        <ul className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
             <li key={link.name}>
               <a 
                 href={link.href} 
-                className="text-sm font-medium text-slate-300 hover:text-primary-400 transition-colors uppercase tracking-wide"
+                className={`text-sm font-medium transition-all uppercase tracking-wide flex items-center gap-1.5 ${
+                  link.isBadge
+                    ? 'px-3 py-1.5 rounded-full bg-primary-600/20 border border-primary-500/50 text-primary-300 hover:bg-primary-600 hover:text-white shadow-md shadow-primary-600/20 font-bold'
+                    : 'text-slate-300 hover:text-primary-400'
+                }`}
               >
+                {link.isBadge && <span className="w-2 h-2 rounded-full bg-primary-400 animate-ping"></span>}
                 {link.name}
               </a>
             </li>
           ))}
+          <li>
+            <button
+              onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+              className="text-sm font-medium transition-all uppercase tracking-wide px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-white"
+            >
+              {language === 'es' ? '🇺🇸 EN' : '🇪🇸 ES'}
+            </button>
+          </li>
         </ul>
 
         {/* Mobile Menu Button (Placeholder for brevity, functional on desktop) */}

@@ -1,13 +1,17 @@
 import React from 'react';
 import { SKILLS } from '../constants';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Skills: React.FC = () => {
+  const { t } = useLanguage();
+  const skillsTranslations = t('skills');
+  
   return (
     <section id="skills" className="py-20 bg-slate-900 relative overflow-hidden">
        <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Habilidades Técnicas</h2>
-          <p className="text-slate-400">Stack tecnológico y herramientas que domino</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{skillsTranslations.title}</h2>
+          <p className="text-slate-400">{skillsTranslations.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
