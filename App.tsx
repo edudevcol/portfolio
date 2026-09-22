@@ -11,6 +11,7 @@ import Contact from './components/Contact';
 import UnifiedAssistant from './components/UnifiedAssistant';
 import FadeInSection from './components/FadeInSection';
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
         <UnifiedAssistant />
 
         <Analytics />
+        <SpeedInsights />
       </div>
     </LanguageProvider>
   );

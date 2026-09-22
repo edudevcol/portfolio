@@ -3,6 +3,7 @@ import { INITIAL_PROJECTS, Icons } from '../constants';
 import { Project } from '../types';
 import ProjectModal from './ProjectModal';
 import { useLanguage } from '../contexts/LanguageContext';
+import { track } from '@vercel/analytics/react';
 
 const Portfolio: React.FC = () => {
   const { t } = useLanguage();
@@ -129,9 +130,14 @@ const Portfolio: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <div 
-              key={project.id} 
-              onClick={() => setSelectedProject(project)}
+            <div
+              key={project.id}
+              onClick={() => {
+                // Qué proyecto abre cada visitante — la señal de qué interesa
+                // de verdad, más útil que solo saber que entraron a la página.
+                track('project_viewed', { project: project.title });
+                setSelectedProject(project);
+              }}
               className="group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-primary-500 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300 cursor-pointer flex flex-col relative"
             >
               {/* Admin Actions */}

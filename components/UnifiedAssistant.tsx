@@ -8,6 +8,7 @@ import { useVoiceStream } from '../hooks/useVoiceStream';
 import { useLanguage } from '../contexts/LanguageContext';
 import { sendMessageToGemini } from '../services/geminiService';
 import { logChatInteraction } from '../services/chatLogger';
+import { track } from '@vercel/analytics/react';
 
 const UnifiedAssistant: React.FC = () => {
   const { t } = useLanguage();
@@ -145,6 +146,9 @@ const UnifiedAssistant: React.FC = () => {
   }, [isCallActive]);
 
   const handleStartCall = useCallback(async () => {
+    // Es la métrica que de verdad importa en un portfolio: no cuántos
+    // entraron a la página, sino cuántos llegaron a hablar con el avatar.
+    track('avatar_call_started');
     initAudioContext();
     await resumeAudioContext();
     pendingCallRef.current = true;
