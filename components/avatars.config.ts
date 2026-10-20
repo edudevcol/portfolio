@@ -18,6 +18,8 @@ export interface AvatarEntry {
   tPoseCorrection?: boolean;
   /** Rotación Y en radianes — corrige orientación cuando la animación gira el modelo */
   rotationY?: number;
+  /** Posición vertical y escala en cuadro — para bustos estáticos (sin huesos), que no siguen el encuadre de cuerpo entero */
+  encuadre?: { y?: number; escala?: number };
   /** Componente React propio — para avatares SVG/procedurales */
   Component?: React.ComponentType<{ volume?: number; mouthShape?: number; status?: AvatarStatus }>;
   /**
@@ -51,9 +53,10 @@ export const AVATARS: AvatarEntry[] = [
     accent: 'from-teal-400 to-cyan-500',
     ring: 'ring-teal-400',
     thumbnail: '🧑',
+    // Busto estático con los 52 gestos ARKit (tools/gestos-maria del repo del avatar). Versión liviana: el portafolio
+    // la usa en pantallas pequeñas (260 px) y la descarga el visitante.
     glbPath: '/models/edu.glb',
-    tPoseCorrection: true,
-    rotationY: 0.5,
+    encuadre: { y: -0.62, escala: 0.8 },
     voice: 'Sadachbia',
   },
 

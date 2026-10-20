@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { INITIAL_PROJECTS, Icons } from '../constants';
 import { Project } from '../types';
 import ProjectModal from './ProjectModal';
+import ProjectVisual from './ProjectVisual';
+import AgenticPipeline from './AgenticPipeline';
 import { useLanguage } from '../contexts/LanguageContext';
 import { track } from '@vercel/analytics/react';
+
+// Clave versionada: una lista guardada de antes taparía los proyectos nuevos de constants.tsx.
+const CLAVE_PROYECTOS = 'portfolio_projects_v2';
 
 const Portfolio: React.FC = () => {
   const { t } = useLanguage();
@@ -11,6 +16,9 @@ const Portfolio: React.FC = () => {
   
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [filtro, setFiltro] = useState<'todos' | 'agentes' | 'herramientas'>('todos');
+  // El modo admin es para el dueño: se abre con ?admin en la dirección y un reclutador no ve el botón.
+  const adminDisponible = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('admin');
   
   // Admin Mode State
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -19,7 +27,7 @@ const Portfolio: React.FC = () => {
 
   // Load projects from localStorage or constants
   useEffect(() => {
-    const stored = localStorage.getItem('portfolio_projects');
+    const stored = localStorage.getItem(CLAVE_PROYECTOS);
     if (stored) {
       setProjects(JSON.parse(stored));
     } else {
@@ -30,7 +38,7 @@ const Portfolio: React.FC = () => {
   // Persist changes
   const saveProjects = (newProjects: Project[]) => {
     setProjects(newProjects);
-    localStorage.setItem('portfolio_projects', JSON.stringify(newProjects));
+    localStorage.setItem(CLAVE_PROYECTOS, JSON.stringify(newProjects));
   };
 
   // CRUD Operations
@@ -107,14 +115,14 @@ const Portfolio: React.FC = () => {
           <p className="text-slate-400 text-center">{portfolioTranslations.subtitle}</p>
           
           {/* Admin Toggle (Hidden/Small for Portfolio feel) */}
-          <div className="absolute right-0 top-0 hidden md:block">
+          {adminDisponible && <div className="absolute right-0 top-0 hidden md:block">
              <button 
                 onClick={() => setIsAdminMode(!isAdminMode)}
                 className={`text-xs px-3 py-1 rounded border ${isAdminMode ? 'bg-red-900/50 border-red-500 text-red-200' : 'bg-slate-800 border-slate-700 text-slate-500'}`}
              >
                 {isAdminMode ? 'Salir Admin' : 'Admin Mode'}
              </button>
-          </div>
+          </div>}
         </div>
 
         {isAdminMode && (
@@ -128,8 +136,28 @@ const Portfolio: React.FC = () => {
             </div>
         )}
 
+        <AgenticPipeline
+          agentes={['4', '5', '6'].map(id => projects.find(p => p.id === id)).filter((p): p is Project => !!p)}
+          onOpen={(p) => { track('project_viewed', { project: p.title }); setSelectedProject(p); }}
+        />
+
+        {/* Filtros por tipo de proyecto */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10" role="tablist" aria-label="Filtrar proyectos">
+          {([['todos', portfolioTranslations.filterAll], ['agentes', portfolioTranslations.filterAgents], ['herramientas', portfolioTranslations.filterTools]] as const).map(([clave, etiqueta]) => (
+            <button
+              key={clave}
+              role="tab"
+              aria-selected={filtro === clave}
+              onClick={() => setFiltro(clave)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all ${filtro === clave ? 'bg-primary-600 border-primary-500 text-white shadow-lg shadow-primary-600/25' : 'bg-slate-800/60 border-slate-700 text-slate-400 hover:text-white hover:border-slate-500'}`}
+            >
+              {etiqueta}
+            </button>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
+          {projects.filter(p => filtro === 'todos' || p.category === filtro).map((project) => (
             <div
               key={project.id}
               onClick={() => {
@@ -159,14 +187,15 @@ const Portfolio: React.FC = () => {
               )}
 
               <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                />
+                <ProjectVisual project={project} className="transform group-hover:scale-110 transition-transform duration-500" />
+                {project.category && (
+                  <span className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold backdrop-blur-sm border ${project.category === 'agentes' ? 'bg-primary-600/80 border-primary-400/50 text-white' : 'bg-slate-950/75 border-slate-600 text-slate-200'}`}>
+                    {project.category === 'agentes' ? portfolioTranslations.filterAgents : portfolioTranslations.filterTools}
+                  </span>
+                )}
                 <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <span className="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    Ver Detalles
+                    {portfolioTranslations.viewDetails}
                   </span>
                 </div>
               </div>

@@ -75,6 +75,14 @@ export const translations = {
     portfolio: {
       title: 'Portfolio',
       subtitle: 'Proyectos destacados',
+      filterAll: 'Todos',
+      filterAgents: 'Agentes de IA',
+      filterTools: 'Herramientas',
+      viewDetails: 'Ver detalles',
+      pipelineEyebrow: 'Agentic QA',
+      pipelineTitle: 'Un flujo de agentes que cubre el ciclo de pruebas',
+      pipelineSubtitle: 'Tres agentes creados con Claude: verifican lo desarrollado, ejecutan las pruebas y reportan en Git, de forma autónoma.',
+      pipelineSteps: ['Verifica', 'Ejecuta', 'Reporta'],
     },
     contact: {
       title: 'Contacto',
@@ -161,6 +169,14 @@ export const translations = {
     portfolio: {
       title: 'Portfolio',
       subtitle: 'Featured projects',
+      filterAll: 'All',
+      filterAgents: 'AI agents',
+      filterTools: 'Tools',
+      viewDetails: 'View details',
+      pipelineEyebrow: 'Agentic QA',
+      pipelineTitle: 'An agent workflow that covers the testing cycle',
+      pipelineSubtitle: 'Three agents built with Claude: they verify what was developed, run the tests and report in Git, autonomously.',
+      pipelineSteps: ['Verify', 'Run', 'Report'],
     },
     contact: {
       title: 'Contact',

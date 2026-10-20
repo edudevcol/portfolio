@@ -46,7 +46,7 @@ export const PROFILE = {
 
 // --- SKILLS ---
 export const SKILLS: Skill[] = [
-  { name: "LLMs (Gemini, GPT, OpenAI)", category: "AI", icon: <Icons.Robot />, level: 70 },
+  { name: "LLMs (Claude, Gemini, GPT, OpenAI)", category: "AI", icon: <Icons.Robot />, level: 70 },
   { name: "Selenium WebDriver", category: "Testing", icon: <Icons.Bug />, level: 65 },
   { name: "Playwright", category: "Testing", icon: <Icons.Terminal />, level: 90 },
   { name: "Cypress", category: "Testing", icon: <Icons.Code />, level: 80 },
@@ -69,6 +69,67 @@ export const SKILLS: Skill[] = [
 
 // --- PROJECTS ---
 export const INITIAL_PROJECTS: Project[] = [
+  // ── Agentic QA: agentes creados con Claude que cubren el ciclo de pruebas ──
+  {
+    id: "4",
+    title: "Cazador de Bugs",
+    shortDescription: "Agente verificador con Claude: cruza el código entregado por el desarrollador contra los criterios de aceptación.",
+    fullDescription: "Con Claude creé un agente que toma el código fuente entregado por el desarrollador y lo cruza contra la documentación de los criterios de aceptación. Así se verifica si el desarrollo incluye lo que realmente se pidió.",
+    technologies: ["Claude", "Agentes de IA", "Criterios de aceptación", "Análisis de código"],
+    image: "",
+    category: "agentes",
+    visual: "criterios",
+    features: [
+      "Lee el código fuente entregado por el desarrollador",
+      "Lo contrasta con la documentación de criterios de aceptación",
+      "Verifica si el desarrollo incluye lo que se pidió"
+    ]
+  },
+  {
+    id: "5",
+    title: "Agente Ejecutor de Pruebas Autónomo",
+    shortDescription: "Agente con Claude que ejecuta las pruebas de forma autónoma.",
+    fullDescription: "Con Claude creé un agente que ejecuta las pruebas de forma autónoma. Es una pieza del flujo de agentes de QA: uno verifica el desarrollo, este ejecuta las pruebas y otro reporta el resultado.",
+    technologies: ["Claude", "Agentes de IA", "Ejecución autónoma", "Automatización de pruebas"],
+    image: "",
+    category: "agentes",
+    visual: "ejecutor",
+    features: [
+      "Ejecuta las pruebas de forma autónoma",
+      "Trabaja junto a los demás agentes del flujo de QA"
+    ]
+  },
+  {
+    id: "6",
+    title: "Agente Reportador de Bugs en Git",
+    shortDescription: "Agente con Claude que reporta en Git, de forma autónoma, los casos de prueba y los bugs con sus correcciones.",
+    fullDescription: "Con Claude creé un agente que reporta de forma autónoma los casos de prueba en Git, junto con las correcciones o los bugs encontrados. Cierra el flujo de agentes de QA: lo verificado y ejecutado queda registrado sin trabajo manual.",
+    technologies: ["Claude", "Agentes de IA", "Git"],
+    image: "",
+    category: "agentes",
+    visual: "git",
+    features: [
+      "Reporta los casos de prueba en Git",
+      "Reporta los bugs encontrados y sus correcciones",
+      "Lo hace de forma autónoma"
+    ]
+  },
+  {
+    id: "7",
+    title: "Playwright Workflow Builder",
+    shortDescription: "Constructor visual de pruebas al estilo n8n: se arman arrastrando nodos y conectándolos.",
+    fullDescription: "Creé una herramienta para construir pruebas de forma visual, al estilo n8n: cada prueba —por ejemplo, hacer login o ingresar al carrito— es un nodo. Se arrastra, se conecta con otro nodo y así se encadenan muchas pruebas en un solo flujo.",
+    technologies: ["Playwright", "Editor de nodos", "Flujos encadenados", "Sin código"],
+    image: "",
+    category: "herramientas",
+    visual: "nodos",
+    features: [
+      "Cada prueba es un nodo que se arrastra al lienzo",
+      "Los nodos se conectan entre sí para encadenar pruebas",
+      "Permite armar escenarios largos sin escribir el orquestador a mano"
+    ]
+  },
+  // ── Herramientas con demo pública ──
   {
     id: "1",
     title: "AI Test Case Generator",
@@ -76,6 +137,7 @@ export const INITIAL_PROJECTS: Project[] = [
     fullDescription: "Aplicación que permite a equipos de QA generar casos de prueba detallados a partir de requisitos o historias de usuario utilizando modelos LLM. Reduce el tiempo de análisis manual y garantiza una mejor cobertura funcional.",
     technologies: ["React", "Jira", "Gemini AI", "Express", "Node.js"],
     image: "./ai-test-case-generator.png",
+    category: "herramientas",
     demoUrl: "https://ai-test-cases-generator-bay.vercel.app",
     repoUrl: "https://github.com/edudevcol/ai-test-cases-generator",
     features: [
@@ -92,6 +154,7 @@ export const INITIAL_PROJECTS: Project[] = [
     fullDescription: "Una herramienta impulsada por IA que genera scripts de automatización Playwright basados en descripciones en lenguaje natural. Ideal para testers que quieren acelerar la creación de casos de prueba E2E sin escribir código desde cero.",
     technologies: ["Playwright", "TypeScript", "LLM", "OpenAI/Gemini"],
     image: "./playwright.png",
+    category: "herramientas",
     demoUrl: "https://playwright-ai-wlz9.vercel.app",
     repoUrl: "https://github.com/edudevcol/playwright-ai",
     features: [
@@ -107,6 +170,7 @@ export const INITIAL_PROJECTS: Project[] = [
     fullDescription: "Una aplicación full-stack que permite a los equipos de QA generar grandes volúmenes de datos de prueba realistas pero anónimos utilizando la API de Gemini. Resuelve el problema de la privacidad de datos en entornos de staging.",
     technologies: ["React", "Node.js", "Gemini AI", "JSON"],
     image: "./tdm.png",
+    category: "herramientas",
     demoUrl: "https://tdm-generator-ai.vercel.app",
     repoUrl: "https://github.com/edudevcol/tdm-generator-ai",
     features: ["Generación de JSON/CSV", "Schemas personalizables", "Validación de tipos de datos", "Exportación masiva"]

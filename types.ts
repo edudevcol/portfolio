@@ -17,6 +17,10 @@ export interface Project {
   repoUrl?: string;
   demoUrl?: string;
   features: string[];
+  /** Para filtrar en la sección de proyectos. */
+  category?: 'agentes' | 'herramientas';
+  /** Ilustración propia en lugar de una captura (proyectos sin demo pública). */
+  visual?: 'criterios' | 'ejecutor' | 'git' | 'nodos';
 }
 
 export interface Experience {

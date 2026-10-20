@@ -11,6 +11,16 @@ const Hero: React.FC = () => {
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-600/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full filter blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }}></div>
+        {/* Rejilla tenue que se desvanece hacia los bordes: da profundidad sin competir con el texto */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
+            maskImage: 'radial-gradient(ellipse at center, black 25%, transparent 72%)',
+            WebkitMaskImage: 'radial-gradient(ellipse at center, black 25%, transparent 72%)',
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-6 text-center">
@@ -30,9 +40,18 @@ const Hero: React.FC = () => {
           {heroTranslations.greeting} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-purple-500">{PROFILE.name}</span>
         </h1>
         
-        <h2 className="text-2xl md:text-3xl font-bold text-slate-300 mb-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-300 mb-5">
           {PROFILE.title}
         </h2>
+
+        {/* En qué me especializo, de un vistazo */}
+        <div className="flex flex-wrap justify-center gap-2 mb-6">
+          {['Agentic QA', 'Test Automation', 'AI Agents', 'Playwright'].map((chip) => (
+            <span key={chip} className="px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-primary-400 bg-primary-500/10 border border-primary-500/30">
+              {chip}
+            </span>
+          ))}
+        </div>
 
         {/* Social Links */}
         <div className="flex justify-center gap-6 mb-8">

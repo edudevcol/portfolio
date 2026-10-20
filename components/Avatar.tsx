@@ -24,7 +24,7 @@ export default function Avatar({ avatarId = DEFAULT_AVATAR_ID, volume = 0, mouth
   if (entry.glbPath) {
     return (
       <div className="select-none" style={{ display: 'inline-block' }}>
-        <GlbAvatar glbPath={entry.glbPath} volume={volume} mouthShape={mouthShape} width={width} height={height} tPoseCorrection={entry.tPoseCorrection} rotationY={entry.rotationY} />
+        <GlbAvatar glbPath={entry.glbPath} volume={volume} mouthShape={mouthShape} width={width} height={height} tPoseCorrection={entry.tPoseCorrection} rotationY={entry.rotationY} encuadre={entry.encuadre} />
       </div>
     );
   }

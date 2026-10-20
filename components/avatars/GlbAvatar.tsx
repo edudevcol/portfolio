@@ -1,8 +1,23 @@
 import React, { useRef, useEffect, useMemo, Suspense } from 'react';
-import { Canvas, useFrame, useGraph } from '@react-three/fiber';
+import { Canvas, useFrame, useGraph, useThree } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import { SkeletonUtils } from 'three-stdlib';
 import * as THREE from 'three';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+
+/** Iluminación de estudio procedural: reflejos suaves y profundidad en la piel, sin descargar HDRs. */
+function AmbienteEstudio({ intensidad = 0.45 }: { intensidad?: number }) {
+  const { gl, scene } = useThree();
+  useEffect(() => {
+    const pmrem = new THREE.PMREMGenerator(gl);
+    const env = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    const prev = scene.environment;
+    scene.environment = env;
+    (scene as any).environmentIntensity = intensidad;
+    return () => { scene.environment = prev; env.dispose(); pmrem.dispose(); };
+  }, [gl, scene, intensidad]);
+  return null;
+}
 
 // Morph targets ARKit/Oculus — Streamoji y RPM los incluyen
 const MOUTH_MORPHS = ['viseme_aa', 'jawOpen', 'viseme_O', 'mouthOpen'];
@@ -44,9 +59,11 @@ interface GLBSceneProps {
   shapeRef: React.RefObject<number>;
   tPoseCorrection?: boolean;
   rotationY?: number;
+  /** Posición vertical y escala del modelo en cuadro (bustos estáticos). */
+  encuadre?: { y?: number; escala?: number };
 }
 
-function GLBScene({ glbPath, volumeRef, shapeRef, tPoseCorrection = false, rotationY = 0 }: GLBSceneProps) {
+function GLBScene({ glbPath, volumeRef, shapeRef, tPoseCorrection = false, rotationY = 0, encuadre }: GLBSceneProps) {
   const { scene, animations } = useGLTF(glbPath);
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   useGraph(clone);
@@ -62,6 +79,7 @@ function GLBScene({ glbPath, volumeRef, shapeRef, tPoseCorrection = false, rotat
   // Meshes con morph targets — cacheados al cargar el modelo
   const meshesRef = useRef<THREE.Mesh[]>([]);
   // Pose de reposo de huesos — para animar relativo a ella
+  const estaticoRef = useRef(false);
   const headRestY = useRef(0);
   const headRestZ = useRef(0);
   const spineRestX = useRef(0);
@@ -112,6 +130,7 @@ function GLBScene({ glbPath, volumeRef, shapeRef, tPoseCorrection = false, rotat
     clone.traverse((node: THREE.Object3D) => {
       if ((node as THREE.Bone).isBone) boneNames.push(node.name);
     });
+    estaticoRef.current = boneNames.length === 0 && !(animations && animations.length > 0);
     console.log(`[GlbAvatar] ${glbPath} — huesos (${boneNames.length}):`, boneNames.join(', '));
     if (meshes.length === 0) {
       console.warn(`[GlbAvatar] ${glbPath} — NO hay meshes con morph targets. Labios no se moverán.`);
@@ -327,9 +346,11 @@ function GLBScene({ glbPath, volumeRef, shapeRef, tPoseCorrection = false, rotat
       if (d['browOuterUpRight'] !== undefined) inf[d['browOuterUpRight']] = browCurrent.current;
     });
 
+    // Busto estático: se queda quieto y de frente a la pantalla (sin balanceo, inclinación ni latido). Solo se mueven la boca,
+    // los ojos y las cejas; un busto que se mece parece flotar.
   });
 
-  return <primitive object={clone} position={[0, -1.65, 0]} rotation={[0, rotationY, 0]} />;
+  return <primitive object={clone} position={[0, encuadre?.y ?? -1.65, 0]} scale={encuadre?.escala ?? 1} rotation={[0, rotationY, 0]} />;
 }
 
 function Loader() {
@@ -387,13 +408,15 @@ export interface GlbAvatarProps {
   tPoseCorrection?: boolean;
   /** Rotación Y del modelo en radianes — para corregir orientación cuando la animación lo gira */
   rotationY?: number;
+  /** Posición vertical y escala del modelo en cuadro (bustos estáticos). */
+  encuadre?: { y?: number; escala?: number };
 }
 
 /**
  * GlbAvatar — renderiza cualquier archivo GLB humanoid con lip sync automático.
  * Soporta morph targets (ARKit/Oculus) y rotación de jaw bone como fallback.
  */
-export default function GlbAvatar({ glbPath, volume = 0, mouthShape = 0, width = 260, height = 312, tPoseCorrection = false, rotationY = 0 }: GlbAvatarProps) {
+export default function GlbAvatar({ glbPath, volume = 0, mouthShape = 0, width = 260, height = 312, tPoseCorrection = false, rotationY = 0, encuadre }: GlbAvatarProps) {
   const volumeRef = useRef<number>(0);
   const shapeRef = useRef<number>(0);
 
@@ -408,13 +431,14 @@ export default function GlbAvatar({ glbPath, volume = 0, mouthShape = 0, width =
   return (
     <AvatarError>
       <div style={{ width, height, display: 'inline-block', borderRadius: 2, overflow: 'hidden' }}>
-        <Canvas style={{ width: '100%', height: '100%' }} camera={{ position: [0, 0, 2.2], fov: 24 }} gl={{ antialias: true }}>
-          <ambientLight intensity={0.8} />
-          <directionalLight position={[3, 5, 5]} intensity={1.3} />
-          <directionalLight position={[-3, 2, 3]} intensity={0.4} color="#AAC4FF" />
-          <directionalLight position={[0, -2, 3]} intensity={0.2} color="#FFD8A0" />
+        <Canvas style={{ width: '100%', height: '100%' }} camera={{ position: [0, 0, 2.2], fov: 24 }} gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 0.95 }}>
+          <AmbienteEstudio />
+          <ambientLight intensity={0.25} />
+          <directionalLight position={[2.5, 3.5, 4]} intensity={1.0} color="#fff3e6" />
+          <directionalLight position={[-3, 1.5, 2]} intensity={0.3} color="#bcd0ff" />
+          <directionalLight position={[-1.5, 2.5, -3]} intensity={0.7} color="#ffffff" />
           <Suspense fallback={<Loader />}>
-            <GLBScene glbPath={glbPath} volumeRef={volumeRef} shapeRef={shapeRef} tPoseCorrection={tPoseCorrection} rotationY={rotationY} />
+            <GLBScene glbPath={glbPath} volumeRef={volumeRef} shapeRef={shapeRef} tPoseCorrection={tPoseCorrection} rotationY={rotationY} encuadre={encuadre} />
           </Suspense>
         </Canvas>
       </div>

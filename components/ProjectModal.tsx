@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Icons } from '../constants';
 import { Project } from '../types';
+import ProjectVisual from './ProjectVisual';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -8,9 +10,19 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  // Escape cierra el modal
+  useEffect(() => {
+    if (!project) return;
+    const alTeclear = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', alTeclear);
+    return () => window.removeEventListener('keydown', alTeclear);
+  }, [project, onClose]);
+
   if (!project) return null;
 
-  return (
+  // Va a document.body: dentro de FadeInSection (que lleva `transform`) un `fixed` se posiciona respecto a la
+  // sección y no a la pantalla, y el modal salía centrado fuera de lo que el visitante estaba viendo.
+  return createPortal(
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6">
       {/* Backdrop */}
       <div 
@@ -29,11 +41,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         {/* Image Section */}
         <div className="w-full md:w-1/2 h-64 md:h-auto bg-slate-800 relative">
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="w-full h-full object-cover"
-          />
+          {project.visual ? (
+            // Las ilustraciones se muestran completas, con su proporción, en vez de recortarlas al alto del panel
+            <div className="w-full h-full flex items-center bg-slate-950">
+              <div className="w-full aspect-[5/3]"><ProjectVisual project={project} /></div>
+            </div>
+          ) : (
+            <ProjectVisual project={project} />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent md:hidden"></div>
         </div>
 
@@ -96,7 +111,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
