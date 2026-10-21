@@ -2,37 +2,86 @@ import React from 'react';
 import { EXPERIENCE } from '../constants';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const Check: React.FC = () => (
+  <svg className="w-4 h-4 mt-0.5 shrink-0 text-primary-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <path fillRule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 111.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clipRule="evenodd" />
+  </svg>
+);
+
 const Experience: React.FC = () => {
   const { t } = useLanguage();
-  const experienceTranslations = t('experience');
-  
+  const tr = t('experience');
+
   return (
     <section id="experience" className="py-20 bg-slate-850">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">{experienceTranslations.title}</h2>
-        
-        <div className="max-w-3xl mx-auto">
-          {EXPERIENCE.map((item, index) => (
-            <div key={item.id} className="relative pl-8 pb-12 last:pb-0 group">
-              {/* Timeline Line */}
-              {index !== EXPERIENCE.length - 1 && (
-                <div className="absolute left-[11px] top-2 h-full w-0.5 bg-slate-700 group-hover:bg-slate-600 transition-colors"></div>
-              )}
-              
-              {/* Dot */}
-              <div className="absolute left-0 top-2 w-6 h-6 rounded-full bg-slate-800 border-4 border-slate-600 group-hover:border-primary-500 group-hover:bg-primary-900 transition-all z-10"></div>
-              
-              <div className="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-sm group-hover:shadow-lg group-hover:border-slate-700 transition-all">
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
-                  <h3 className="text-xl font-bold text-white">{item.role}</h3>
-                  <span className="inline-block px-3 py-1 text-xs font-semibold text-primary-300 bg-primary-900/30 rounded-full mt-2 sm:mt-0">
-                    {item.period}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">{tr.title}</h2>
+          <p className="text-slate-400">{tr.subtitle}</p>
+        </div>
+
+        {/* Foco actual: hacia dónde va el trabajo, con salto a los agentes */}
+        <a
+          href="#portfolio"
+          className="group flex items-center gap-4 mb-8 rounded-2xl border border-violet-500/30 bg-gradient-to-r from-violet-950/50 to-slate-900 px-6 py-5 hover:border-violet-400/60 transition-colors"
+        >
+          <span className="relative flex h-3 w-3 shrink-0">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-60 animate-ping" />
+            <span className="relative inline-flex h-3 w-3 rounded-full bg-violet-400" />
+          </span>
+          <div className="min-w-0">
+            <span className="block text-xs font-bold tracking-[0.18em] uppercase text-violet-300">{tr.focusLabel}</span>
+            <span className="block text-sm md:text-base text-slate-300">{tr.focusText}</span>
+          </div>
+          <span className="ml-auto text-violet-300 group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+        </a>
+
+        {/* Ocupa el ancho como el resto de secciones: el cargo actual, más grande, y el anterior al lado */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          {EXPERIENCE.map((item) => (
+            <div
+              key={item.id}
+              className={`${item.current ? 'lg:col-span-3 border-primary-500/30' : 'lg:col-span-2 border-slate-800'} bg-slate-900 p-6 md:p-8 rounded-2xl border hover:border-slate-600 hover:shadow-xl transition-all flex flex-col`}
+            >
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                {item.current && (
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    {tr.current}
                   </span>
+                )}
+                <span className="px-3 py-1 text-xs font-semibold text-primary-300 bg-primary-900/30 rounded-full">{item.period}</span>
+              </div>
+              <h3 className={`${item.current ? 'text-2xl' : 'text-xl'} font-bold text-white`}>{item.role}</h3>
+              <h4 className="text-primary-400 font-medium mt-1 mb-5">{item.company}</h4>
+
+              <ul className="space-y-3 mb-6">
+                {item.highlights.map((h, i) => (
+                  <li key={i} className="flex gap-2.5 text-sm md:text-[15px] text-slate-300 leading-relaxed">
+                    <Check />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {item.agentic && (
+                <div className="mb-6 rounded-xl border border-violet-500/25 bg-violet-950/20 p-4">
+                  <span className="block text-xs font-bold tracking-[0.18em] uppercase text-violet-300 mb-3">{tr.agenticLabel}</span>
+                  <ul className="space-y-2.5">
+                    {item.agentic.map((h, i) => (
+                      <li key={i} className="flex gap-2.5 text-sm md:text-[15px] text-slate-200 leading-relaxed">
+                        <svg className="w-4 h-4 mt-0.5 shrink-0 text-violet-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2l1.8 4.9L17 8.7l-4.2 3.2L14 17l-4-2.8L6 17l1.2-5.1L3 8.7l5.2-1.8L10 2z" /></svg>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h4 className="text-primary-400 font-medium mb-3">{item.company}</h4>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  {item.description}
-                </p>
+              )}
+
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {item.tags.map((tag) => (
+                  <span key={tag} className="px-2.5 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs text-slate-300">{tag}</span>
+                ))}
               </div>
             </div>
           ))}

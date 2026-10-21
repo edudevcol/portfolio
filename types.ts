@@ -2,9 +2,10 @@ import { ReactNode } from 'react';
 
 export interface Skill {
   name: string;
-  category: 'Frontend' | 'Backend' | 'Testing' | 'AI' | 'Tools';
-  icon: ReactNode; // We will pass SVG components
-  level: number; // 1-100
+  category: 'Agentic AI' | 'Testing' | 'Desarrollo' | 'Herramientas';
+  /** Qué hago con ella: solo para las del grupo destacado (Agentic AI). */
+  description?: string;
+  icon?: ReactNode;
 }
 
 export interface Project {
@@ -20,7 +21,11 @@ export interface Project {
   /** Para filtrar en la sección de proyectos. */
   category?: 'agentes' | 'herramientas';
   /** Ilustración propia en lugar de una captura (proyectos sin demo pública). */
-  visual?: 'criterios' | 'ejecutor' | 'git' | 'nodos';
+  visual?: 'criterios' | 'ejecutor' | 'jira' | 'nodos' | 'avatar';
+  /** Fotos extra para el detalle (además de la imagen de portada). */
+  galeria?: string[];
+  /** Esquema que se muestra en el detalle debajo de las fotos (cuando la portada es una foto real). */
+  visualDetalle?: 'criterios' | 'ejecutor' | 'jira' | 'nodos' | 'avatar';
 }
 
 export interface Experience {
@@ -28,7 +33,14 @@ export interface Experience {
   role: string;
   company: string;
   period: string;
+  /** Texto corrido: lo lee el asistente de IA como contexto. */
   description: string;
+  /** Los logros, uno por línea: lo que se ve en pantalla. */
+  highlights: string[];
+  /** Lo agéntico de este cargo, en un bloque propio con su etiqueta. */
+  agentic?: string[];
+  tags: string[];
+  current?: boolean;
 }
 
 export interface Education {

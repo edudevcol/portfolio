@@ -1,0 +1,24 @@
+# Eduardo Navarro
+
+> Ingeniero de QA que construye agentes de IA para que hagan el trabajo de QA: verifican que el código cumpla lo que se pidió, ejecutan las pruebas y reportan los bugs en Jira. / QA engineer who builds AI agents that do the QA work: they check that the code meets what was requested, run the tests and file the bugs in Jira.
+
+Contacto / Contact: edudevcol@gmail.com · https://www.linkedin.com/in/eduardonavarroecheverria · https://github.com/edudevcol
+
+## Perfil completo / Full profile
+
+- [Datos estructurados (JSON)](https://portfolio.edudev.biz/perfil.json): toda la información verificada en un solo archivo.
+- [CV en texto plano (Markdown, español)](https://portfolio.edudev.biz/cv.md)
+- [CV in plain text (Markdown, English)](https://portfolio.edudev.biz/cv.en.md)
+- [CV en PDF, versión limpia de una columna (español)](https://portfolio.edudev.biz/Eduardo_Navarro_CV_ES.pdf)
+- [Clean one-column PDF resume (English)](https://portfolio.edudev.biz/Eduardo_Navarro_CV_EN.pdf)
+- [CV en PDF, versión diseñada](https://portfolio.edudev.biz/EDUARDONAVARRO2025_CV.pdf)
+- [Portafolio interactivo](https://portfolio.edudev.biz/)
+- Servidor MCP del perfil (solo lectura, para agentes): https://api.edudev.biz/mcp — herramientas: obtener_perfil, obtener_experiencia, obtener_habilidades, listar_proyectos, obtener_formacion, evaluar_encaje_con_puesto, obtener_contacto.
+
+## Proyectos / Projects
+
+- [Clon digital: avatar conversacional con IA](https://cv.edudev.biz): se puede conversar con él en vivo.
+- [AI Test Case Generator](https://ai-test-cases-generator-bay.vercel.app)
+- [AI Script Generator Playwright](https://playwright-ai-wlz9.vercel.app)
+- [AI Test Data Generator](https://tdm-generator-ai.vercel.app)
+- Código / Code: https://github.com/edudevcol

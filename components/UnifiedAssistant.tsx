@@ -9,8 +9,23 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { sendMessageToGemini } from '../services/geminiService';
 import { logChatInteraction } from '../services/chatLogger';
 import { track } from '@vercel/analytics/react';
+import { EVENTO_INICIAR_LLAMADA } from '../services/llamadaAvatar';
+
+/** ¿Pantalla de celular? Reactivo, para renderizar UN solo avatar (dos lienzos WebGL a la vez pesan mucho en el móvil). */
+function useEsMovil(): boolean {
+  const consulta = '(max-width: 767px)';
+  const [movil, setMovil] = useState(() => typeof window !== 'undefined' && window.matchMedia(consulta).matches);
+  useEffect(() => {
+    const m = window.matchMedia(consulta);
+    const alCambiar = () => setMovil(m.matches);
+    m.addEventListener('change', alCambiar);
+    return () => m.removeEventListener('change', alCambiar);
+  }, []);
+  return movil;
+}
 
 const UnifiedAssistant: React.FC = () => {
+  const esMovil = useEsMovil();
   const { t } = useLanguage();
   const avatarTranslations = t('avatar');
   
@@ -155,6 +170,17 @@ const UnifiedAssistant: React.FC = () => {
     connect();
   }, [connect, initAudioContext, resumeAudioContext]);
 
+  // Los botones de la página (barra, Hero, proyecto destacado) piden la llamada por evento: esta es la única llamada.
+  const iniciarRef = useRef(handleStartCall);
+  iniciarRef.current = handleStartCall;
+  const enLlamadaRef = useRef(false);
+  enLlamadaRef.current = isCallActive;
+  useEffect(() => {
+    const alPedir = () => { if (!enLlamadaRef.current) void iniciarRef.current(); };
+    window.addEventListener(EVENTO_INICIAR_LLAMADA, alPedir);
+    return () => window.removeEventListener(EVENTO_INICIAR_LLAMADA, alPedir);
+  }, []);
+
   const handleEndCall = useCallback(() => {
     stopPlayback();
     stopVolumeLoop();
@@ -287,7 +313,7 @@ const UnifiedAssistant: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center font-sans">
+    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex flex-col items-center font-sans">
       {/* Chat Window (hidden - no toggle button to open it) */}
       {isChatOpen && (
         <div className="mb-4 w-[90vw] md:w-96 h-[500px] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-up origin-bottom-right ring-1 ring-white/10">
@@ -385,39 +411,62 @@ const UnifiedAssistant: React.FC = () => {
         </div>
       )}
 
-      {/* Avatar */}
-      <div className="relative w-[200px] h-[220px] flex items-center justify-center bg-transparent">
-        <Avatar 
-          avatarId={selectedAvatar} 
-          volume={volume} 
-          mouthShape={mouthShape} 
-          status={avatarStatus}
-          width={200}
-          height={220}
-        />
-      </div>
-
-      {/* Call Button */}
-      <div className="mt-2">
-        {!isCallActive ? (
-          <button
-            onClick={handleStartCall}
-            className="w-10 h-10 rounded-full bg-emerald-500 hover:bg-emerald-400 active:scale-95 flex items-center justify-center shadow-lg shadow-emerald-500/40 transition-all duration-200"
-          >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
-              <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
-            </svg>
-          </button>
+      {/* Avatar y botón de llamada. Celular: círculo compacto con el botón sobre su esquina (el busto de 200x220 tapaba el contenido).
+          Escritorio: el busto con el botón debajo. */}
+      <div className="relative flex flex-col items-center">
+        {esMovil ? (
+          // Celular: el lienzo mide EXACTAMENTE la burbuja y la cámara se acerca a la cara. Antes se movía un lienzo de
+          // 200x220 con CSS y la cara salía corrida; resolverlo dentro de la escena 3D no depende del tamaño de pantalla.
+          <div className="relative w-[84px] h-[84px] rounded-full overflow-hidden border-2 border-primary-500/60 bg-slate-800 shadow-xl shadow-black/40">
+            <Avatar
+              avatarId={selectedAvatar}
+              volume={volume}
+              mouthShape={mouthShape}
+              status={avatarStatus}
+              width={84}
+              height={84}
+              encuadre={{ y: -0.7, escala: 1.15 }}
+            />
+          </div>
         ) : (
-          <button
-            onClick={handleEndCall}
-            className="w-10 h-10 rounded-full bg-red-500 hover:bg-red-400 active:scale-95 flex items-center justify-center shadow-lg shadow-red-500/40 transition-all duration-200"
-          >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
-              <path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.49 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z" />
-            </svg>
-          </button>
+          <div className="relative w-[200px] h-[220px]">
+            <Avatar
+              avatarId={selectedAvatar}
+              volume={volume}
+              mouthShape={mouthShape}
+              status={avatarStatus}
+              width={200}
+              height={220}
+            />
+          </div>
         )}
+
+        <div className={esMovil ? 'absolute -bottom-2.5 -right-2.5' : 'mt-2'}>
+          {!isCallActive ? (
+            <div className="relative">
+              {esMovil && <span className="absolute inset-0 rounded-full bg-emerald-400/50 animate-ping" aria-hidden="true" />}
+              <button
+                onClick={handleStartCall}
+                aria-label="Hablar con el avatar"
+                className="relative w-10 h-10 rounded-full bg-emerald-500 hover:bg-emerald-400 active:scale-95 flex items-center justify-center shadow-lg shadow-emerald-500/40 transition-all duration-200"
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
+                  <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
+                </svg>
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={handleEndCall}
+              aria-label="Terminar la llamada"
+              className="w-10 h-10 rounded-full bg-red-500 hover:bg-red-400 active:scale-95 flex items-center justify-center shadow-lg shadow-red-500/40 transition-all duration-200"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
+                <path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.49 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z" />
+              </svg>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Error */}

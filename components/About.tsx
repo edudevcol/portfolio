@@ -14,12 +14,26 @@ const About: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 border-l-4 border-primary-500 pl-4">
               {aboutTranslations.title}
             </h2>
-            <p className="text-slate-400 text-lg leading-relaxed mb-6">
-              Soy un profesional apasionado por la calidad del software, la automatización y la mejora continua. Me desenvuelvo tanto en QA como en desarrollo web, lo que me permite comprender el ciclo de vida completo de una aplicación. Aseguro que los productos sean robustos, escalables y confiables, combinando prácticas avanzadas de pruebas con herramientas modernas de automatización.
+            <p className="text-slate-300 text-lg leading-relaxed mb-5">
+              Soy ingeniero de sistemas y llevo desde 2020 en la <strong className="text-white">Sociedad Portuaria Regional de Cartagena</strong> automatizando pruebas de aplicaciones web críticas, con pruebas funcionales y de APIs REST en metodología ágil.
             </p>
-            <p className="text-slate-400 text-lg leading-relaxed mb-8">
-              Actualmente, estoy explorando la intersección entre <strong>QA y la Inteligencia Artificial</strong>, utilizando LLMs para generar datos de prueba y optimizar flujos de testing.
+            <p className="text-slate-300 text-lg leading-relaxed mb-6">
+              Hoy me enfoco en el <strong className="text-white">Agentic QA</strong>: construyo agentes de IA que verifican el código contra los criterios de aceptación, ejecutan las pruebas y reportan los bugs en Jira. Como también desarrollo (React, Node.js, TypeScript), construyo mis propias herramientas.
             </p>
+
+            {/* Lo que aporto: tres afirmaciones, cada una con su evidencia más abajo en la página */}
+            <ul className="space-y-3 mb-8">
+              {[
+                ['Cubro el ciclo de QA completo', 'de los criterios de aceptación a las pruebas y al reporte en Jira, con agentes de IA.'],
+                ['Construyo mis propias herramientas', 'plataformas con IA, generadores de datos y scripts, y un avatar conversacional conectado por MCP.'],
+                ['Automatización con las herramientas del mercado', 'Playwright, Selenium, TestComplete y Cypress, además de flujos de pruebas por nodos al estilo n8n.'],
+              ].map(([titulo, detalle]) => (
+                <li key={titulo} className="flex gap-3">
+                  <svg className="w-5 h-5 mt-1 shrink-0 text-primary-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fillRule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 111.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clipRule="evenodd" /></svg>
+                  <span className="text-slate-300"><strong className="text-white">{titulo}:</strong> {detalle}</span>
+                </li>
+              ))}
+            </ul>
 
             <div className="flex gap-4">
               <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
@@ -47,6 +61,12 @@ const About: React.FC = () => {
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" /></svg>
                   Descargar CV
                 </a>
+                <p className="mt-3 text-sm text-slate-500">
+                  Versión de una columna para sistemas de selección:{' '}
+                  <a href="/Eduardo_Navarro_CV_ES.pdf" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 underline underline-offset-2">español</a>
+                  {' · '}
+                  <a href="/Eduardo_Navarro_CV_EN.pdf" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 underline underline-offset-2">English</a>
+                </p>
               </div>
           </div>
 
@@ -65,6 +85,9 @@ const About: React.FC = () => {
                 </div>
               ))}
             </div>
+            <p className="mt-8 pt-6 border-t border-slate-800 text-sm text-slate-400">
+              <span className="font-semibold text-slate-300">Idiomas:</span> Español (nativo) · Inglés (básico, A2)
+            </p>
           </div>
         </div>
       </div>

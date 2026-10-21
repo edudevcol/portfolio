@@ -1,0 +1,5 @@
+# Portafolio profesional: se invita a buscadores y a rastreadores de IA a leerlo.
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio.edudev.biz/sitemap.xml

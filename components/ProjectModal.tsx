@@ -40,8 +40,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         </button>
 
         {/* Image Section */}
-        <div className="w-full md:w-1/2 h-64 md:h-auto bg-slate-800 relative">
-          {project.visual ? (
+        <div className={`w-full md:w-1/2 ${project.galeria ? '' : 'h-64'} md:h-auto bg-slate-800 relative`}>
+          {project.galeria ? (
+            // Fotos reales del producto arriba y, debajo, el esquema de cómo se conecta
+            <div className="w-full h-full flex flex-col bg-slate-950">
+              <div className={`grid ${project.galeria.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} gap-px bg-slate-800`}>
+                {project.galeria.map((src, i) => (
+                  <img key={i} src={src} alt={`${project.title} ${i + 1}`} className={`w-full object-cover ${project.galeria.length > 1 ? 'aspect-square' : 'aspect-[4/3]'}`} />
+                ))}
+              </div>
+              {project.visualDetalle && (
+                <div className="w-full aspect-[5/3]"><ProjectVisual project={{ ...project, visual: project.visualDetalle }} /></div>
+              )}
+            </div>
+          ) : project.visual ? (
             // Las ilustraciones se muestran completas, con su proporción, en vez de recortarlas al alto del panel
             <div className="w-full h-full flex items-center bg-slate-950">
               <div className="w-full aspect-[5/3]"><ProjectVisual project={project} /></div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import AvatarSection from './components/AvatarSection';
 import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
@@ -25,9 +24,6 @@ function App() {
               <Hero />
           </FadeInSection>
 
-          <FadeInSection delay="0.1s">
-              <AvatarSection />
-          </FadeInSection>
           
           <FadeInSection delay="0.2s">
               <About />

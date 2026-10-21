@@ -12,19 +12,21 @@ interface AvatarProps {
   status?: AvatarStatus;
   width?: number;
   height?: number;
+  /** Sustituye el encuadre del catálogo (la burbuja del celular acerca la cámara a la cara). */
+  encuadre?: { y?: number; escala?: number };
 }
 
 /**
  * Avatar — router dinámico que despacha al componente correcto según AVATARS config.
  * Los avatares GLB usan GlbAvatar genérico; los SVG usan su componente propio.
  */
-export default function Avatar({ avatarId = DEFAULT_AVATAR_ID, volume = 0, mouthShape = 0, status = 'idle', width, height }: AvatarProps) {
+export default function Avatar({ avatarId = DEFAULT_AVATAR_ID, volume = 0, mouthShape = 0, status = 'idle', width, height, encuadre }: AvatarProps) {
   const entry = AVATARS.find(a => a.id === avatarId) ?? AVATARS[0];
 
   if (entry.glbPath) {
     return (
       <div className="select-none" style={{ display: 'inline-block' }}>
-        <GlbAvatar glbPath={entry.glbPath} volume={volume} mouthShape={mouthShape} width={width} height={height} tPoseCorrection={entry.tPoseCorrection} rotationY={entry.rotationY} encuadre={entry.encuadre} />
+        <GlbAvatar glbPath={entry.glbPath} volume={volume} mouthShape={mouthShape} width={width} height={height} tPoseCorrection={entry.tPoseCorrection} rotationY={entry.rotationY} encuadre={encuadre ?? entry.encuadre} />
       </div>
     );
   }

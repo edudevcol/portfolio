@@ -89,31 +89,68 @@ const Ejecutor: React.FC = () => (
   </svg>
 );
 
-/** Casos de prueba y bugs reportados en Git: ramas, commit del bug y su corrección. */
-const Git: React.FC = () => (
-  <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" className="w-full h-full" role="img" aria-label="Casos de prueba y bugs reportados en Git">
-    <Fondo id="gt" from="#2e1065" to="#0f172a" />
-    <path d="M30 150H370" stroke="#a78bfa" strokeOpacity="0.7" strokeWidth="3" strokeLinecap="round" />
-    <path d="M110 150C130 150 130 80 160 80H250C280 80 280 150 300 150" fill="none" stroke="#f472b6" strokeOpacity="0.7" strokeWidth="3" />
-    {[50, 110, 300, 350].map((x) => <circle key={x} cx={x} cy="150" r="8" fill="#0f172a" stroke="#a78bfa" strokeWidth="3" />)}
-    <circle cx="170" cy="80" r="9" fill="#450a0a" stroke="#f87171" strokeWidth="3" />
-    <path d="M166 76l8 8M174 76l-8 8" stroke="#f87171" strokeWidth="2" strokeLinecap="round" />
-    <circle cx="240" cy="80" r="9" fill="#022c22" stroke="#34d399" strokeWidth="3" />
-    <path d="M235.5 80l3 3 5-6" fill="none" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <g fontFamily="ui-monospace, monospace" fontSize="10">
-      <rect x="128" y="38" width="84" height="20" rx="6" fill="#450a0a" fillOpacity="0.8" stroke="#f87171" strokeOpacity="0.6" />
-      <text x="170" y="52" textAnchor="middle" fill="#fca5a5">bug detectado</text>
-      <rect x="204" y="38" width="76" height="20" rx="6" fill="#022c22" fillOpacity="0.8" stroke="#34d399" strokeOpacity="0.6" />
-      <text x="242" y="52" textAnchor="middle" fill="#6ee7b7">corrección</text>
-      <text x="50" y="184" textAnchor="middle" fill="#c4b5fd">casos</text>
-      <text x="300" y="184" textAnchor="middle" fill="#c4b5fd">merge</text>
-      <text x="350" y="184" textAnchor="middle" fill="#c4b5fd">main</text>
-    </g>
-    <circle r="4" fill="#f9a8d4">
-      <animateMotion dur="4s" repeatCount="indefinite" path="M30 150H110C130 150 130 80 160 80H250C280 80 280 150 300 150H370" />
+/** Casos de prueba y bugs reportados en Jira: un tablero con tarjetas que avanzan de "bug" a "corregido". */
+const Jira: React.FC = () => (
+  <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" className="w-full h-full" role="img" aria-label="Casos de prueba y bugs reportados en Jira">
+    <Fondo id="jr" from="#0b2a5b" to="#0f172a" />
+    {[['CASOS', 22, '#60a5fa'], ['BUGS', 146, '#f87171'], ['CORREGIDO', 270, '#34d399']].map(([t, x, c], i) => (
+      <g key={i} transform={`translate(${x} 30)`}>
+        <rect width="108" height="180" rx="10" fill="#0b1426" stroke={c as string} strokeOpacity="0.35" />
+        <text x="12" y="20" fontSize="9" fontWeight="700" letterSpacing="1.2" fill={c as string} fontFamily="ui-sans-serif, system-ui">{t as string}</text>
+        {[0, 1, 2].slice(0, i === 1 ? 2 : 3).map((k) => (
+          <g key={k} transform={`translate(10 ${34 + k * 46})`}>
+            <rect width="88" height="38" rx="6" fill="#111c33" stroke="#ffffff" strokeOpacity="0.08" />
+            <rect x="8" y="9" width={50 - k * 8} height="5" rx="2.5" fill="#cbd5e1" fillOpacity="0.7" />
+            <rect x="8" y="20" width="32" height="4" rx="2" fill="#64748b" fillOpacity="0.6" />
+            <rect x="8" y="28" width="22" height="4" rx="2" fill={c as string} fillOpacity="0.55" />
+            <circle cx="76" cy="26" r="5" fill={c as string} fillOpacity="0.25" stroke={c as string} strokeOpacity="0.8" />
+            {i === 1 && <path d="M73.5 23.5l5 5M78.5 23.5l-5 5" stroke="#f87171" strokeWidth="1.5" strokeLinecap="round" />}
+            {i === 2 && <path d="M73.5 26l2 2 3.5-4" fill="none" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />}
+          </g>
+        ))}
+      </g>
+    ))}
+    <path d="M130 100h16M254 100h16" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeDasharray="3 4" />
+    <circle r="4" fill="#fca5a5">
+      <animateMotion dur="3s" repeatCount="indefinite" path="M130 100H146M254 100H270" />
     </circle>
   </svg>
 );
+
+/** El avatar conversacional: la cara en el centro y las herramientas y servidores MCP a los que está conectado. */
+const AvatarMcp: React.FC = () => {
+  const sat = [['Gmail', 62, 52], ['Calendar', 62, 120], ['Drive', 62, 188], ['Tareas', 338, 52], ['MCP', 338, 120], ['Teléfono', 338, 188]] as const;
+  return (
+    <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" className="w-full h-full" role="img" aria-label="Avatar conversacional conectado a múltiples servidores MCP">
+      <Fondo id="av" from="#1e1b4b" to="#0c4a6e" />
+      {sat.map(([t, x, y]) => (
+        <path key={t} d={`M200 120C${(200 + x) / 2} 120 ${(200 + x) / 2} ${y} ${x} ${y}`} fill="none" stroke="#67e8f9" strokeOpacity="0.45" strokeWidth="1.6" strokeDasharray="3 4">
+          <animate attributeName="stroke-dashoffset" values="14;0" dur="1.6s" repeatCount="indefinite" />
+        </path>
+      ))}
+      <circle cx="200" cy="120" r="58" fill="#6366f1" fillOpacity="0.14">
+        <animate attributeName="r" values="56;64;56" dur="3s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="200" cy="120" r="46" fill="#0b1020" stroke="#818cf8" strokeWidth="2" />
+      <circle cx="200" cy="108" r="14" fill="#a5b4fc" fillOpacity="0.85" />
+      <path d="M172 150c2-16 14-22 28-22s26 6 28 22" fill="#a5b4fc" fillOpacity="0.85" />
+      <g transform="translate(200 172)" fill="#67e8f9">
+        {[-18, -9, 0, 9, 18].map((dx, i) => (
+          <rect key={dx} x={dx - 2} y="-8" width="4" height="16" rx="2" fillOpacity="0.85">
+            <animate attributeName="height" values={`${6 + i * 2};18;${6 + i * 2}`} dur={`${0.9 + i * 0.12}s`} repeatCount="indefinite" />
+            <animate attributeName="y" values={`${-(3 + i)};-9;${-(3 + i)}`} dur={`${0.9 + i * 0.12}s`} repeatCount="indefinite" />
+          </rect>
+        ))}
+      </g>
+      {sat.map(([t, x, y]) => (
+        <g key={t} transform={`translate(${x - 34} ${y - 14})`}>
+          <rect width="68" height="28" rx="14" fill="#0b1426" stroke="#67e8f9" strokeOpacity="0.55" />
+          <text x="34" y="18" textAnchor="middle" fontSize="11" fill="#e0f2fe" fontFamily="ui-sans-serif, system-ui">{t}</text>
+        </g>
+      ))}
+    </svg>
+  );
+};
 
 /** Editor de nodos al estilo n8n: cada prueba es un nodo y se encadenan arrastrando. */
 const Nodos: React.FC = () => (
@@ -142,7 +179,7 @@ const Nodos: React.FC = () => (
   </svg>
 );
 
-const VISUALES: Record<Visual, React.FC> = { criterios: Criterios, ejecutor: Ejecutor, git: Git, nodos: Nodos };
+const VISUALES: Record<Visual, React.FC> = { criterios: Criterios, ejecutor: Ejecutor, jira: Jira, nodos: Nodos, avatar: AvatarMcp };
 
 interface Props { project: Pick<Project, 'title' | 'image' | 'visual'>; className?: string; }
 
@@ -152,7 +189,7 @@ const ProjectVisual: React.FC<Props> = ({ project, className = '' }) => {
     const V = VISUALES[project.visual];
     return <div className={`w-full h-full ${className}`}><V /></div>;
   }
-  return <img src={project.image} alt={project.title} className={`w-full h-full object-cover ${className}`} />;
+  return <img src={project.image} alt={`Captura del proyecto ${project.title}`} loading="lazy" decoding="async" className={`w-full h-full object-cover ${className}`} />;
 };
 
 export default ProjectVisual;

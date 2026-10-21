@@ -1,0 +1,441 @@
+{
+  "_nota": "Fuente única del perfil. De aquí se generan cv.md, cv.en.md, llms.txt, el bloque estático de index.html y los datos estructurados (node scripts/generar-perfil.mjs), y lo lee el servidor MCP del clon digital. Solo hechos verificados: si algo no está aquí, no se publica.",
+  "version": "2026-10-20",
+  "nombre": "Eduardo Navarro",
+  "nombreCompleto": "Eduardo Navarro Echeverría",
+  "ubicacion": {
+    "ciudad": "Cartagena",
+    "pais": "Colombia",
+    "codigoPais": "CO"
+  },
+  "contacto": {
+    "email": "edudevcol@gmail.com",
+    "whatsapp": "+573001244352",
+    "linkedin": "https://www.linkedin.com/in/eduardonavarroecheverria",
+    "github": "https://github.com/edudevcol",
+    "portafolio": "https://portfolio.edudev.biz",
+    "clonDigital": "https://cv.edudev.biz",
+    "cvPdf": "https://portfolio.edudev.biz/EDUARDONAVARRO2025_CV.pdf",
+    "mcp": "https://api.edudev.biz/mcp",
+    "cvPdfLimpioEs": "https://portfolio.edudev.biz/Eduardo_Navarro_CV_ES.pdf",
+    "cvPdfLimpioEn": "https://portfolio.edudev.biz/Eduardo_Navarro_CV_EN.pdf"
+  },
+  "titulo": {
+    "es": "Agentic QA Engineer · Automatización de pruebas · Full Stack Developer",
+    "en": "Agentic QA Engineer · Test Automation · Full Stack Developer"
+  },
+  "posicionamiento": {
+    "es": "Ingeniero de QA que construye agentes de IA para que hagan el trabajo de QA: verifican que el código cumpla lo que se pidió, ejecutan las pruebas y reportan los bugs en Jira.",
+    "en": "QA engineer who builds AI agents that do the QA work: they check that the code meets what was requested, run the tests and file the bugs in Jira."
+  },
+  "resumen": {
+    "es": "Desde 2020 en la Sociedad Portuaria Regional de Cartagena automatizando pruebas de aplicaciones web críticas con Selenium, Playwright y TestComplete, con pruebas funcionales y de APIs REST en metodología ágil (SCRUM). Hoy me enfoco en el Agentic QA: agentes de IA que cubren el ciclo de pruebas, además de una plataforma que genera casos de prueba y criterios de aceptación en Jira y Confluence. Como también desarrollo (React, Node.js, TypeScript), construyo mis propias herramientas.",
+    "en": "Since 2020 at Sociedad Portuaria Regional de Cartagena, automating tests for business-critical web applications with Selenium, Playwright and TestComplete, covering functional and REST API testing in an agile (SCRUM) way. My current focus is Agentic QA: AI agents that cover the testing cycle, plus a platform that generates test cases and acceptance criteria in Jira and Confluence. Because I also develop (React, Node.js, TypeScript), I build my own tools."
+  },
+  "enfoqueActual": {
+    "es": "Agentes de IA para el ciclo de pruebas (verificar, ejecutar, reportar) y su integración con Jira.",
+    "en": "AI agents for the testing cycle (verify, run, report) and their integration with Jira."
+  },
+  "habilidades": [
+    {
+      "id": "agentic",
+      "nombre": {
+        "es": "Agentic AI",
+        "en": "Agentic AI"
+      },
+      "items": [
+        "Agentes de IA autónomos",
+        "MCP (Model Context Protocol)",
+        "Agentes de voz en tiempo real (Gemini Live API, WebSocket)",
+        "Flujos de pruebas por nodos",
+        "LLMs (Claude, Gemini, GPT, OpenAI)"
+      ]
+    },
+    {
+      "id": "testing",
+      "nombre": {
+        "es": "Automatización de pruebas",
+        "en": "Test automation"
+      },
+      "items": [
+        "Playwright",
+        "Cypress",
+        "TestComplete",
+        "Selenium WebDriver",
+        "Postman",
+        "Pruebas funcionales",
+        "Pruebas de APIs REST"
+      ]
+    },
+    {
+      "id": "desarrollo",
+      "nombre": {
+        "es": "Desarrollo",
+        "en": "Development"
+      },
+      "items": [
+        "TypeScript / JavaScript",
+        "React",
+        "Node.js",
+        "Express",
+        "Java",
+        "SQL",
+        "MongoDB",
+        "Python"
+      ]
+    },
+    {
+      "id": "herramientas",
+      "nombre": {
+        "es": "Herramientas y metodologías",
+        "en": "Tools and methods"
+      },
+      "items": [
+        "Jira",
+        "Confluence",
+        "Git",
+        "Docker",
+        "Metodologías ágiles (SCRUM)"
+      ]
+    }
+  ],
+  "experiencia": [
+    {
+      "empresa": "Sociedad Portuaria Regional de Cartagena",
+      "cargo": {
+        "es": "Senior QA Automation Engineer",
+        "en": "Senior QA Automation Engineer"
+      },
+      "periodo": {
+        "es": "2020 – presente",
+        "en": "2020 – present"
+      },
+      "actual": true,
+      "agentic": [
+        {
+          "es": "Cazador de Bugs: agente de IA que cruza el código entregado por el desarrollador contra los criterios de aceptación y verifica si lo desarrollado incluye lo que se pidió.",
+          "en": "Bug Hunter (Cazador de Bugs): an AI agent that checks the code delivered by the developer against the acceptance criteria and verifies that what was built includes what was requested."
+        },
+        {
+          "es": "Agente ejecutor: ejecuta las pruebas de forma autónoma.",
+          "en": "Execution agent: runs the tests autonomously."
+        },
+        {
+          "es": "Agente reportador: reporta en Jira, de forma autónoma, los casos de prueba y los bugs con sus correcciones.",
+          "en": "Reporting agent: autonomously files test cases and bugs, with their fixes, in Jira."
+        },
+        {
+          "es": "Playwright Workflow Builder: las pruebas se arman arrastrando nodos al estilo n8n (por ejemplo, login o ingresar al carrito) y se encadenan en un solo flujo.",
+          "en": "Playwright Workflow Builder: tests are built by dragging nodes, n8n style (for example login or adding to the cart), and chained into a single flow."
+        },
+        {
+          "es": "Chatbot que ejecuta pruebas automatizadas con Playwright mediante lenguaje natural.",
+          "en": "Chatbot that runs automated Playwright tests from natural language."
+        },
+        {
+          "es": "MCP (Model Context Protocol) con Playwright para pruebas inteligentes y autónomas.",
+          "en": "MCP (Model Context Protocol) with Playwright for intelligent, autonomous testing."
+        }
+      ],
+      "logros": [
+        {
+          "es": "Diseño e implemento automatización de pruebas con Selenium, Playwright y TestComplete para aplicaciones web críticas, con pruebas funcionales y de APIs REST en metodología ágil (SCRUM).",
+          "en": "Design and implement test automation with Selenium, Playwright and TestComplete for business-critical web applications, including functional and REST API tests, working in agile (SCRUM)."
+        },
+        {
+          "es": "Lidero el desarrollo de una plataforma con IA que genera casos de prueba y criterios de aceptación y los documenta en Jira y Confluence.",
+          "en": "Lead the development of an AI platform that generates test cases and acceptance criteria and documents them in Jira and Confluence."
+        },
+        {
+          "es": "Desarrollé una herramienta de datos sintéticos con LLMs que resuelve problemas de privacidad y optimiza los entornos de staging.",
+          "en": "Built a synthetic-data tool with LLMs that addresses privacy concerns and improves staging environments."
+        },
+        {
+          "es": "Construí una aplicación web que transforma casos de prueba escritos en lenguaje natural en scripts automatizados listos para ejecutar.",
+          "en": "Built a web application that turns test cases written in natural language into ready-to-run automated scripts."
+        }
+      ],
+      "tags": [
+        "Claude",
+        "Agentes de IA",
+        "Selenium",
+        "Playwright",
+        "TestComplete",
+        "Postman",
+        "Jira",
+        "Confluence",
+        "SCRUM",
+        "LLMs"
+      ],
+      "cargoInterno": {
+        "es": "Analista de Pruebas de Software N3",
+        "en": "Software Testing Analyst, level N3"
+      }
+    },
+    {
+      "empresa": "Calzado Latino",
+      "cargo": {
+        "es": "Analista de Sistemas",
+        "en": "Systems Analyst"
+      },
+      "periodo": {
+        "es": "2017 – 2019",
+        "en": "2017 – 2019"
+      },
+      "actual": false,
+      "logros": [
+        {
+          "es": "Desarrollé funcionalidades de escritorio en VB .Net y gestioné bases de datos en SQL Server.",
+          "en": "Developed desktop features in VB .Net and managed SQL Server databases."
+        },
+        {
+          "es": "Di soporte técnico (Helpdesk) a usuarios internos: incidencias de hardware, software y aplicaciones corporativas.",
+          "en": "Provided internal Helpdesk support: hardware, software and corporate application incidents."
+        },
+        {
+          "es": "Elaboré reportes y automatizaciones en Excel con macros y VBA que optimizaron tareas repetitivas.",
+          "en": "Built reports and Excel automations with macros and VBA that streamlined repetitive tasks."
+        }
+      ],
+      "tags": [
+        "VB .Net",
+        "SQL Server",
+        "VBA",
+        "Excel",
+        "Helpdesk"
+      ]
+    }
+  ],
+  "proyectos": [
+    {
+      "id": "avatar-conversacional",
+      "destacado": true,
+      "nombre": {
+        "es": "Avatar Conversacional con IA (clon digital)",
+        "en": "Conversational AI Avatar (digital clone)"
+      },
+      "resumen": {
+        "es": "Asistente de voz con avatar 3D y sincronización labial en tiempo real, conectado a servidores MCP y a Gmail, Calendar, Contactos, Drive y Tasks. Funciona por teléfono y en reloj inteligente; las acciones sensibles exigen confirmación hablada y nunca inventa un dato cuando una herramienta falla.",
+        "en": "Voice assistant with a 3D avatar and real-time lip sync, connected to MCP servers and to Gmail, Calendar, Contacts, Drive and Tasks. Works by phone and on a smartwatch; sensitive actions require spoken confirmation and it never makes up data when a tool fails."
+      },
+      "stack": [
+        "React",
+        "Node.js",
+        "TypeScript",
+        "Gemini Live API",
+        "WebSocket",
+        "MCP",
+        "Google Workspace APIs"
+      ],
+      "demo": "https://cv.edudev.biz"
+    },
+    {
+      "id": "cazador-de-bugs",
+      "empresa": "Sociedad Portuaria Regional de Cartagena",
+      "nombre": {
+        "es": "Cazador de Bugs",
+        "en": "Bug Hunter (Cazador de Bugs)"
+      },
+      "resumen": {
+        "es": "Agente de IA que cruza el código fuente entregado por el desarrollador contra los criterios de aceptación para verificar si lo desarrollado incluye lo que se pidió.",
+        "en": "AI agent that checks the source code delivered by the developer against the acceptance criteria to verify that what was built includes what was requested."
+      },
+      "stack": [
+        "Agentes de IA",
+        "Criterios de aceptación"
+      ]
+    },
+    {
+      "id": "agente-ejecutor",
+      "empresa": "Sociedad Portuaria Regional de Cartagena",
+      "nombre": {
+        "es": "Agente Ejecutor de Pruebas Autónomo",
+        "en": "Autonomous Test Execution Agent"
+      },
+      "resumen": {
+        "es": "Agente de IA que ejecuta las pruebas de forma autónoma.",
+        "en": "AI agent that runs the tests autonomously."
+      },
+      "stack": [
+        "Agentes de IA",
+        "Automatización de pruebas"
+      ]
+    },
+    {
+      "id": "agente-reportador",
+      "empresa": "Sociedad Portuaria Regional de Cartagena",
+      "nombre": {
+        "es": "Agente Reportador de Bugs en Jira",
+        "en": "Jira Bug Reporting Agent"
+      },
+      "resumen": {
+        "es": "Agente de IA que reporta en Jira, de forma autónoma, los casos de prueba y los bugs con sus correcciones.",
+        "en": "AI agent that autonomously files test cases and bugs, with their fixes, in Jira."
+      },
+      "stack": [
+        "Agentes de IA",
+        "Jira"
+      ]
+    },
+    {
+      "id": "playwright-workflow-builder",
+      "empresa": "Sociedad Portuaria Regional de Cartagena",
+      "nombre": {
+        "es": "Playwright Workflow Builder",
+        "en": "Playwright Workflow Builder"
+      },
+      "resumen": {
+        "es": "Constructor visual de pruebas al estilo n8n: cada prueba es un nodo y se encadenan arrastrando y conectando.",
+        "en": "Visual test builder, n8n style: each test is a node and they are chained by dragging and connecting."
+      },
+      "stack": [
+        "Playwright",
+        "Editor de nodos",
+        "Flujos encadenados"
+      ]
+    },
+    {
+      "id": "ai-test-case-generator",
+      "nombre": {
+        "es": "AI Test Case Generator",
+        "en": "AI Test Case Generator"
+      },
+      "resumen": {
+        "es": "Casos de prueba desde requisitos con LLMs y exportación a Jira.",
+        "en": "Test cases from requirements with LLMs and export to Jira."
+      },
+      "stack": [
+        "React",
+        "Jira",
+        "Gemini AI",
+        "Express",
+        "Node.js"
+      ],
+      "demo": "https://ai-test-cases-generator-bay.vercel.app",
+      "repo": "https://github.com/edudevcol/ai-test-cases-generator"
+    },
+    {
+      "id": "ai-script-generator-playwright",
+      "nombre": {
+        "es": "AI Script Generator Playwright",
+        "en": "AI Script Generator Playwright"
+      },
+      "resumen": {
+        "es": "Scripts Playwright a partir de lenguaje natural.",
+        "en": "Playwright scripts from natural language."
+      },
+      "stack": [
+        "Playwright",
+        "TypeScript",
+        "LLM",
+        "OpenAI/Gemini"
+      ],
+      "demo": "https://playwright-ai-wlz9.vercel.app",
+      "repo": "https://github.com/edudevcol/playwright-ai"
+    },
+    {
+      "id": "ai-test-data-generator",
+      "nombre": {
+        "es": "AI Test Data Generator",
+        "en": "AI Test Data Generator"
+      },
+      "resumen": {
+        "es": "Datos de prueba sintéticos y anónimos con LLMs.",
+        "en": "Synthetic, anonymous test data with LLMs."
+      },
+      "stack": [
+        "React",
+        "Node.js",
+        "Gemini AI",
+        "JSON"
+      ],
+      "demo": "https://tdm-generator-ai.vercel.app",
+      "repo": "https://github.com/edudevcol/tdm-generator-ai"
+    }
+  ],
+  "formacion": [
+    {
+      "titulo": {
+        "es": "Ingeniería de Sistemas",
+        "en": "Systems Engineering"
+      },
+      "institucion": "Universidad de Cartagena",
+      "fecha": "2016"
+    },
+    {
+      "titulo": {
+        "es": "Full Stack Developer Web (TypeScript/JS, React, Node.js, Express, MongoDB, SQL, Java)",
+        "en": "Full Stack Web Developer (TypeScript/JS, React, Node.js, Express, MongoDB, SQL, Java)"
+      },
+      "institucion": "Bootcamp Coderhouse",
+      "fecha": "2024"
+    }
+  ],
+  "idiomas": [
+    {
+      "idioma": {
+        "es": "Español",
+        "en": "Spanish"
+      },
+      "nivel": {
+        "es": "Nativo",
+        "en": "Native"
+      }
+    },
+    {
+      "idioma": {
+        "es": "Inglés",
+        "en": "English"
+      },
+      "nivel": {
+        "es": "Básico (A2)",
+        "en": "Basic (A2)"
+      }
+    }
+  ],
+  "busca": {
+    "reubicacion": true,
+    "destinosPreferidos": {
+      "es": [
+        "España",
+        "Europa"
+      ],
+      "en": [
+        "Spain",
+        "Europe"
+      ]
+    },
+    "modalidad": {
+      "es": "Remoto, híbrido o presencial",
+      "en": "Remote, hybrid or on-site"
+    },
+    "disponibilidad": {
+      "es": "Casi inmediata",
+      "en": "Near-immediate"
+    },
+    "tambienAbiertoA": {
+      "es": "Empresas y proyectos locales: no cierra la puerta a nada.",
+      "en": "Local companies and projects too: no door is closed."
+    },
+    "rolesObjetivo": {
+      "es": [
+        "QA Automation Engineer",
+        "SDET",
+        "Agentic QA Engineer",
+        "AI Test Engineer",
+        "Ingeniero de IA conversacional y agentes de voz"
+      ],
+      "en": [
+        "QA Automation Engineer",
+        "SDET",
+        "Agentic QA Engineer",
+        "AI Test Engineer",
+        "Conversational AI / voice agents engineer"
+      ]
+    },
+    "permisoDeTrabajo": {
+      "es": "Ciudadano colombiano, sin permiso de trabajo en España ni en la UE: busca empresas dispuestas a tramitar el permiso y a reubicarlo con su familia.",
+      "en": "Colombian citizen without a work permit in Spain or the EU: looking for companies willing to sponsor the permit and relocate him with his family."
+    }
+  }
+}

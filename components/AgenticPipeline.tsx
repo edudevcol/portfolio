@@ -22,7 +22,7 @@ const Flecha: React.FC = () => (
 
 /**
  * El hilo que une los tres agentes de QA: lo desarrollado se verifica, se ejecutan las pruebas y se
- * reporta en Git. Cada tarjeta abre el detalle del proyecto.
+ * reporta en Jira. Cada tarjeta abre el detalle del proyecto.
  */
 const AgenticPipeline: React.FC<Props> = ({ agentes, onOpen }) => {
   const { t } = useLanguage();

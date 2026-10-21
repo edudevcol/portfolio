@@ -6,9 +6,15 @@ import ProjectVisual from './ProjectVisual';
 import AgenticPipeline from './AgenticPipeline';
 import { useLanguage } from '../contexts/LanguageContext';
 import { track } from '@vercel/analytics/react';
+import { iniciarLlamadaAvatar } from '../services/llamadaAvatar';
 
 // Clave versionada: una lista guardada de antes taparía los proyectos nuevos de constants.tsx.
 const CLAVE_PROYECTOS = 'portfolio_projects_v2';
+
+// Los tres agentes del flujo (verifica → ejecuta → reporta) se muestran arriba, en el diagrama; no se repiten en la cuadrícula.
+const IDS_FLUJO = ['4', '5', '6'];
+// El avatar conversacional va aparte, en grande: es el proyecto con el que el visitante está hablando.
+const ID_DESTACADO = '8';
 
 const Portfolio: React.FC = () => {
   const { t } = useLanguage();
@@ -16,7 +22,6 @@ const Portfolio: React.FC = () => {
   
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [filtro, setFiltro] = useState<'todos' | 'agentes' | 'herramientas'>('todos');
   // El modo admin es para el dueño: se abre con ?admin en la dirección y un reclutador no ve el botón.
   const adminDisponible = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('admin');
   
@@ -137,27 +142,51 @@ const Portfolio: React.FC = () => {
         )}
 
         <AgenticPipeline
-          agentes={['4', '5', '6'].map(id => projects.find(p => p.id === id)).filter((p): p is Project => !!p)}
+          agentes={IDS_FLUJO.map(id => projects.find(p => p.id === id)).filter((p): p is Project => !!p)}
           onOpen={(p) => { track('project_viewed', { project: p.title }); setSelectedProject(p); }}
         />
 
-        {/* Filtros por tipo de proyecto */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10" role="tablist" aria-label="Filtrar proyectos">
-          {([['todos', portfolioTranslations.filterAll], ['agentes', portfolioTranslations.filterAgents], ['herramientas', portfolioTranslations.filterTools]] as const).map(([clave, etiqueta]) => (
-            <button
-              key={clave}
-              role="tab"
-              aria-selected={filtro === clave}
-              onClick={() => setFiltro(clave)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all ${filtro === clave ? 'bg-primary-600 border-primary-500 text-white shadow-lg shadow-primary-600/25' : 'bg-slate-800/60 border-slate-700 text-slate-400 hover:text-white hover:border-slate-500'}`}
+        {/* Proyecto destacado: el avatar conversacional */}
+        {(() => {
+          const destacado = projects.find(p => p.id === ID_DESTACADO);
+          if (!destacado) return null;
+          return (
+            <div
+              onClick={() => { track('project_viewed', { project: destacado.title }); setSelectedProject(destacado); }}
+              className="group mb-16 grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden border border-cyan-500/25 bg-slate-800/60 hover:border-cyan-400/60 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 cursor-pointer"
             >
-              {etiqueta}
-            </button>
-          ))}
-        </div>
+              <div className="h-56 lg:h-auto lg:min-h-[300px] overflow-hidden">
+                <ProjectVisual project={destacado} className="transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <div className="p-6 md:p-10 flex flex-col justify-center">
+                <span className="inline-block self-start text-xs font-bold tracking-[0.2em] uppercase text-cyan-300 mb-3">{portfolioTranslations.featuredEyebrow}</span>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">{destacado.title}</h3>
+                <p className="text-slate-300 leading-relaxed mb-5">{destacado.shortDescription}</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {destacado.technologies.slice(0, 6).map(tech => (
+                    <span key={tech} className="text-xs font-medium text-slate-300 bg-slate-900 border border-slate-700 px-2.5 py-1 rounded-md">{tech}</span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); iniciarLlamadaAvatar(); }}
+                    className="px-5 py-2.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold transition-colors"
+                  >
+                    {portfolioTranslations.featuredCta}
+                  </button>
+                  <span className="px-5 py-2.5 rounded-lg border border-slate-600 text-slate-300 text-sm font-semibold group-hover:border-slate-400 transition-colors">{portfolioTranslations.viewDetails} →</span>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.filter(p => filtro === 'todos' || p.category === filtro).map((project) => (
+        {/* El resto de los proyectos (los agentes del flujo ya están arriba) */}
+        <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-8">{portfolioTranslations.moreTitle}</h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+          {projects.filter(p => !IDS_FLUJO.includes(p.id) && p.id !== ID_DESTACADO).map((project) => (
             <div
               key={project.id}
               onClick={() => {
