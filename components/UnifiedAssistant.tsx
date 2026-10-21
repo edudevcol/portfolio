@@ -24,9 +24,22 @@ function useEsMovil(): boolean {
   return movil;
 }
 
+const ASIST = {
+  es: {
+    saludo: '¡Hola! Soy la IA asistente de este portfolio. ¿Tienes alguna pregunta sobre mi experiencia en Testing o Desarrollo?',
+    borrar: '¿Estás seguro de borrar la conversación?', vacio: 'No hay conversación para descargar aún.',
+    guardar: 'Guardar conversación', cerrar: 'Cerrar', placeholder: 'Escribe tu pregunta...', hablar: 'Hablar con el avatar',
+  },
+  en: {
+    saludo: "Hi! I'm the AI assistant of this portfolio. Do you have any question about my experience in Testing or Development?",
+    borrar: 'Are you sure you want to delete the conversation?', vacio: 'There is no conversation to download yet.',
+    guardar: 'Save conversation', cerrar: 'Close', placeholder: 'Type your question...', hablar: 'Talk to the avatar',
+  },
+} as const;
+
 const UnifiedAssistant: React.FC = () => {
   const esMovil = useEsMovil();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const avatarTranslations = t('avatar');
   
   // Avatar voice state
@@ -44,10 +57,14 @@ const UnifiedAssistant: React.FC = () => {
     {
       id: 'init',
       role: 'model',
-      text: '¡Hola! Soy la IA asistente de este portfolio. ¿Tienes alguna pregunta sobre mi experiencia en Testing o Desarrollo?',
+      text: ASIST[language].saludo,
       timestamp: new Date(),
     }
   ]);
+  // Si aún no se ha conversado, el saludo sigue al idioma elegido
+  useEffect(() => {
+    setMessages(m => (m.length === 1 && m[0].id === 'init' ? [{ ...m[0], text: ASIST[language].saludo }] : m));
+  }, [language]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -242,7 +259,7 @@ const UnifiedAssistant: React.FC = () => {
 
     try {
       const history = messages.map(m => ({ role: m.role, text: m.text }));
-      const aiResponse = await sendMessageToGemini(currentInput, history);
+      const aiResponse = await sendMessageToGemini(currentInput, history, language);
       
       const aiMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
@@ -272,12 +289,12 @@ const UnifiedAssistant: React.FC = () => {
     const initialMsg: ChatMessage = {
         id: 'init',
         role: 'model',
-        text: '¡Hola! Soy la IA asistente de este portfolio. ¿Tienes alguna pregunta sobre mi experiencia en Testing o Desarrollo?',
+        text: ASIST[language].saludo,
         timestamp: new Date(),
     };
 
     if (messages.length > 1) {
-        if (window.confirm("¿Estás seguro de borrar la conversación?")) {
+        if (window.confirm(ASIST[language].borrar)) {
             setMessages([initialMsg]);
             setIsLoading(false);
             setTimeout(() => inputRef.current?.focus(), 100);
@@ -292,7 +309,7 @@ const UnifiedAssistant: React.FC = () => {
   const handleDownloadChat = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (messages.length <= 1) {
-        alert("No hay conversación para descargar aún.");
+        alert(ASIST[language].vacio);
         return;
     }
 
@@ -336,7 +353,7 @@ const UnifiedAssistant: React.FC = () => {
                 <button 
                     type="button"
                     onClick={handleDownloadChat} 
-                    title="Guardar conversación"
+                    title={ASIST[language].guardar}
                     className="text-slate-400 hover:text-blue-400 hover:bg-slate-700/50 transition-colors p-1.5 rounded-md"
                 >
                     <Icons.Download />
@@ -352,7 +369,7 @@ const UnifiedAssistant: React.FC = () => {
                 <button 
                     type="button"
                     onClick={() => setIsChatOpen(false)} 
-                    title="Cerrar"
+                    title={ASIST[language].cerrar}
                     className="text-slate-400 hover:text-white transition-colors p-1 rounded-md hover:bg-slate-700/50"
                 >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -397,7 +414,7 @@ const UnifiedAssistant: React.FC = () => {
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="Escribe tu pregunta..."
+              placeholder={ASIST[language].placeholder}
               className="flex-1 bg-slate-900 text-white text-sm rounded-xl px-4 py-3 border border-slate-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all placeholder-slate-500"
             />
             <button 
@@ -447,7 +464,7 @@ const UnifiedAssistant: React.FC = () => {
               {esMovil && <span className="absolute inset-0 rounded-full bg-emerald-400/50 animate-ping" aria-hidden="true" />}
               <button
                 onClick={handleStartCall}
-                aria-label="Hablar con el avatar"
+                aria-label={ASIST[language].hablar}
                 className="relative w-10 h-10 rounded-full bg-emerald-500 hover:bg-emerald-400 active:scale-95 flex items-center justify-center shadow-lg shadow-emerald-500/40 transition-all duration-200"
               >
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white">

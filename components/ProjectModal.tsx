@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Icons } from '../constants';
-import { Project } from '../types';
+import { Project, L } from '../types';
+import { useLanguage } from '../contexts/LanguageContext';
 import ProjectVisual from './ProjectVisual';
 
 interface ProjectModalProps {
@@ -9,7 +10,14 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
+const ETIQUETAS = {
+  es: { descripcion: 'Descripción', caracteristicas: 'Características', stack: 'Stack Tecnológico', demo: 'Demo en vivo' },
+  en: { descripcion: 'Description', caracteristicas: 'Features', stack: 'Tech Stack', demo: '{etiquetas.demo}' },
+} as const;
+
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const { language } = useLanguage();
+  const etiquetas = ETIQUETAS[language];
   // Escape cierra el modal
   useEffect(() => {
     if (!project) return;
@@ -66,34 +74,34 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         {/* Details Section */}
         <div className="w-full md:w-1/2 p-8 flex flex-col">
-          <h3 className="text-3xl font-bold text-white mb-2">{project.title}</h3>
-          <p className="text-primary-400 text-lg mb-6">{project.shortDescription}</p>
+          <h3 className="text-3xl font-bold text-white mb-2">{L(project.title, language)}</h3>
+          <p className="text-primary-400 text-lg mb-6">{L(project.shortDescription, language)}</p>
           
           <div className="mb-6">
-            <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Descripción</h4>
+            <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">{etiquetas.descripcion}</h4>
             <p className="text-slate-300 leading-relaxed">
-              {project.fullDescription}
+              {L(project.fullDescription, language)}
             </p>
           </div>
 
           <div className="mb-6">
-            <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Características</h4>
+            <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">{etiquetas.caracteristicas}</h4>
             <ul className="space-y-2">
               {project.features.map((feature, idx) => (
                 <li key={idx} className="flex items-start text-slate-300 text-sm">
                   <span className="mr-2 text-primary-500">•</span>
-                  {feature}
+                  {L(feature, language)}
                 </li>
               ))}
             </ul>
           </div>
 
           <div className="mb-8">
-            <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Stack Tecnológico</h4>
+            <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">{etiquetas.stack}</h4>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech, idx) => (
                 <span key={idx} className="px-3 py-1 bg-slate-800 text-slate-300 rounded-full text-xs border border-slate-700">
-                  {tech}
+                  {L(tech, language)}
                 </span>
               ))}
             </div>
@@ -117,7 +125,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 rel="noreferrer"
                 className="flex-1 py-3 flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-500 text-white rounded-lg transition-colors shadow-lg shadow-primary-600/20"
               >
-                Live Demo
+                {etiquetas.demo}
               </a>
             )}
           </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { SKILLS } from '../constants';
+import { L } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
 
 /**
@@ -13,7 +14,7 @@ const GRUPOS_SECUNDARIOS: Array<{ clave: 'Testing' | 'Desarrollo' | 'Herramienta
 ];
 
 const Skills: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const tr = t('skills');
   const agenticas = SKILLS.filter(s => s.category === 'Agentic AI');
 
@@ -37,12 +38,12 @@ const Skills: React.FC = () => {
             <div className="flex md:grid md:grid-cols-2 lg:grid-cols-6 gap-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-6 px-6 md:mx-0 md:px-0 pb-3 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {/* 5 tarjetas: tres arriba y dos abajo repartiéndose el ancho, sin hueco */}
               {agenticas.map((skill, i) => (
-                <div key={skill.name} className={`${i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'} group shrink-0 w-[82%] sm:w-[60%] md:w-auto snap-start rounded-2xl bg-slate-900/80 border border-slate-700/80 hover:border-violet-400/60 p-5 transition-all duration-300 hover:-translate-y-1`}>
+                <div key={i} className={`${i < 3 ? 'lg:col-span-2' : 'lg:col-span-3'} group shrink-0 w-[82%] sm:w-[60%] md:w-auto snap-start rounded-2xl bg-slate-900/80 border border-slate-700/80 hover:border-violet-400/60 p-5 transition-all duration-300 hover:-translate-y-1`}>
                   <div className="mb-3 inline-flex p-2.5 rounded-lg bg-violet-500/10 text-violet-300 group-hover:bg-violet-600 group-hover:text-white transition-colors">
                     {skill.icon}
                   </div>
-                  <h4 className="text-base font-semibold text-white mb-1">{skill.name}</h4>
-                  <p className="text-sm text-slate-400 leading-relaxed">{skill.description}</p>
+                  <h4 className="text-base font-semibold text-white mb-1">{L(skill.name, language)}</h4>
+                  <p className="text-sm text-slate-400 leading-relaxed">{skill.description ? L(skill.description, language) : null}</p>
                 </div>
               ))}
             </div>
@@ -58,9 +59,9 @@ const Skills: React.FC = () => {
                 {tr.groups[clave]}
               </h3>
               <div className="flex flex-wrap gap-2">
-                {SKILLS.filter(s => s.category === clave).map((skill) => (
-                  <span key={skill.name} className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm text-slate-200">
-                    {skill.name}
+                {SKILLS.filter(s => s.category === clave).map((skill, i) => (
+                  <span key={i} className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sm text-slate-200">
+                    {L(skill.name, language)}
                   </span>
                 ))}
               </div>

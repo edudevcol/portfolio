@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Project } from '../types';
 import ProjectVisual from './ProjectVisual';
+import { L } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface Props {
@@ -25,7 +26,7 @@ const Flecha: React.FC = () => (
  * reporta en Jira. Cada tarjeta abre el detalle del proyecto.
  */
 const AgenticPipeline: React.FC<Props> = ({ agentes, onOpen }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const tr = t('portfolio');
   if (agentes.length === 0) return null;
 
@@ -54,8 +55,8 @@ const AgenticPipeline: React.FC<Props> = ({ agentes, onOpen }) => {
                   </span>
                 </div>
                 <div className="p-4">
-                  <h4 className="text-base font-bold text-white mb-1 group-hover:text-primary-400 transition-colors">{a.title}</h4>
-                  <p className="text-sm text-slate-400 line-clamp-3">{a.shortDescription}</p>
+                  <h4 className="text-base font-bold text-white mb-1 group-hover:text-primary-400 transition-colors">{L(a.title, language)}</h4>
+                  <p className="text-sm text-slate-400 line-clamp-3">{L(a.shortDescription, language)}</p>
                 </div>
               </button>
             </React.Fragment>

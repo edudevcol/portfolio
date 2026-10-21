@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
         <button
           type="button"
           className="md:hidden p-2 -mr-2 text-slate-300 hover:text-white"
-          aria-label={menuAbierto ? 'Cerrar menú' : 'Abrir menú'}
+          aria-label={menuAbierto ? (language === 'es' ? 'Cerrar menú' : 'Close menu') : (language === 'es' ? 'Abrir menú' : 'Open menu')}
           aria-expanded={menuAbierto}
           onClick={() => setMenuAbierto(!menuAbierto)}
         >

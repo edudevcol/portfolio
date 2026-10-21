@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacidad y tratamiento de datos · Privacy · Eduardo Navarro</title>
+  <meta name="robots" content="noindex">
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; background: #0f172a; color: #cbd5e1; font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    main { max-width: 42rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+    h1 { color: #fff; font-size: 1.6rem; margin: 0 0 .25rem; } h2 { color: #fff; font-size: 1.1rem; margin: 1.8rem 0 .4rem; }
+    a { color: #818cf8; } ul { padding-left: 1.2rem; } li { margin: .3rem 0; }
+    .sw { margin: 1rem 0 1.5rem; font-size: .9rem; } .sw a { margin-right: .75rem; }
+    .nota { color: #94a3b8; font-size: .9rem; margin-top: 2rem; }
+    [data-l] { display: none; } html[lang="es"] [data-l="es"], html[lang="en"] [data-l="en"] { display: block; }
+    html[lang="es"] li[data-l="es"], html[lang="en"] li[data-l="en"] { display: list-item; }
+  </style>
+</head>
+<body>
+<main>
+  <p class="sw"><a href="/">&larr; portfolio</a> <a href="?lang=es" data-ir="es">Español</a><a href="?lang=en" data-ir="en">English</a></p>
+
+  <section data-l="es">
+    <h1>Privacidad y tratamiento de datos</h1>
+    <p>Responsable: Eduardo Navarro Echeverría, Cartagena, Colombia. Contacto: <a href="mailto:edudevcol@gmail.com">edudevcol@gmail.com</a>.</p>
+    <h2>Qué se registra</h2>
+    <ul>
+      <li><strong>Al abrir el portafolio o cv.edudev.biz:</strong> fecha y hora, la página, de dónde llegaste, el idioma, el tamaño de pantalla, tu dirección IP y tu navegador y dispositivo.</li>
+      <li><strong>Al hablar con el clon digital (voz):</strong> el contenido de la conversación, su duración, tu IP y tu navegador. La voz se envía a Google (Gemini) para generar la respuesta.</li>
+      <li><strong>Si eres un agente de IA que usa el servidor MCP:</strong> la herramienta que llamas, el texto que envías (por ejemplo, una oferta de trabajo o una pregunta), tu IP y el cliente que usas.</li>
+    </ul>
+    <h2>Para qué</h2>
+    <p>Contacto profesional y selección de personal, seguridad (evitar abusos del servicio) y mejorar el clon digital y el portafolio. No se venden datos. Se comparten solo con los proveedores técnicos necesarios: Google (inteligencia artificial), Vercel y Contabo (alojamiento) y Telegram, por donde el propietario recibe avisos de actividad.</p>
+    <h2>Cuánto tiempo</h2>
+    <p>El tiempo necesario para esos fines. Puedes pedir que se borren tus datos en cualquier momento.</p>
+    <h2>Tus derechos</h2>
+    <p>Conforme a la Ley 1581 de 2012 de Colombia (Habeas Data) puedes conocer, actualizar, rectificar y suprimir tus datos y revocar tu autorización. Si estás en la Unión Europea, también puedes ejercer los derechos que te da el RGPD. Escribe a <a href="mailto:edudevcol@gmail.com">edudevcol@gmail.com</a>.</p>
+    <p class="nota">Por favor no compartas datos sensibles (salud, documentos, claves) en la conversación con el clon digital.</p>
+  </section>
+
+  <section data-l="en">
+    <h1>Privacy and data handling</h1>
+    <p>Controller: Eduardo Navarro Echeverría, Cartagena, Colombia. Contact: <a href="mailto:edudevcol@gmail.com">edudevcol@gmail.com</a>.</p>
+    <h2>What is recorded</h2>
+    <ul>
+      <li><strong>When you open the portfolio or cv.edudev.biz:</strong> date and time, the page, where you came from, language, screen size, your IP address and your browser and device.</li>
+      <li><strong>When you talk to the digital clone (voice):</strong> the content of the conversation, its duration, your IP and your browser. Your voice is sent to Google (Gemini) to generate the answer.</li>
+      <li><strong>If you are an AI agent using the MCP server:</strong> the tool you call, the text you send (for example a job posting or a question), your IP and the client you use.</li>
+    </ul>
+    <h2>Why</h2>
+    <p>Professional contact and recruiting, security (preventing abuse of the service), and improving the digital clone and the portfolio. Data is not sold. It is shared only with the technical providers involved: Google (artificial intelligence), Vercel and Contabo (hosting) and Telegram, where the owner receives activity alerts.</p>
+    <h2>For how long</h2>
+    <p>As long as needed for those purposes. You can ask for your data to be deleted at any time.</p>
+    <h2>Your rights</h2>
+    <p>Under Colombia's Law 1581 of 2012 (Habeas Data) you may know, update, correct and delete your data and revoke your authorization. If you are in the European Union you can also exercise your GDPR rights. Write to <a href="mailto:edudevcol@gmail.com">edudevcol@gmail.com</a>.</p>
+    <p class="nota">Please do not share sensitive data (health, documents, passwords) in the conversation with the digital clone.</p>
+  </section>
+</main>
+<script>
+  var l = new URLSearchParams(location.search).get('lang');
+  if (l !== 'en' && l !== 'es') l = /^en/i.test(navigator.language) ? 'en' : 'es';
+  document.documentElement.lang = l;
+</script>
+</body>
+</html>

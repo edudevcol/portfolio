@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode , useEffect } from 'react';
 import { translations, Language } from '../translations';
 
 interface LanguageContextType {
@@ -11,6 +11,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('es');
+  // Lectores de pantalla y traductores del navegador se guían por <html lang>
+  useEffect(() => { document.documentElement.lang = language; }, [language]);
 
   const t = (section: string): any => {
     return translations[language][section as keyof typeof translations.es];

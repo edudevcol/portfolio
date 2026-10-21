@@ -18,7 +18,8 @@ if (apiKey) {
 
 export const sendMessageToGemini = async (
   userMessage: string,
-  history: { role: 'user' | 'model'; text: string }[]
+  history: { role: 'user' | 'model'; text: string }[],
+  language: 'es' | 'en' = 'es'
 ): Promise<string> => {
   if (!ai) {
     return "Lo siento, no estoy configurado correctamente (falta API Key).";
@@ -31,7 +32,7 @@ export const sendMessageToGemini = async (
     const chat = ai.chats.create({
       model: 'gemini-2.5-flash',
       config: {
-        systemInstruction: RESUME_CONTEXT,
+        systemInstruction: language === 'en' ? `${RESUME_CONTEXT}\n\nReply in English, whatever language the context above is written in.` : RESUME_CONTEXT,
         temperature: 0.7,
       },
       history: history.map(h => ({

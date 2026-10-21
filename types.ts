@@ -1,23 +1,27 @@
 import { ReactNode } from 'react';
 
+/** Texto en un solo idioma, o con las dos versiones; `L` elige según el idioma activo. */
+export type Bilingual = string | { es: string; en: string };
+export const L = (x: Bilingual, lang: 'es' | 'en'): string => (typeof x === 'string' ? x : x[lang]);
+
 export interface Skill {
-  name: string;
+  name: Bilingual;
   category: 'Agentic AI' | 'Testing' | 'Desarrollo' | 'Herramientas';
   /** Qué hago con ella: solo para las del grupo destacado (Agentic AI). */
-  description?: string;
+  description?: Bilingual;
   icon?: ReactNode;
 }
 
 export interface Project {
   id: string;
-  title: string;
-  shortDescription: string;
-  fullDescription: string;
-  technologies: string[];
+  title: Bilingual;
+  shortDescription: Bilingual;
+  fullDescription: Bilingual;
+  technologies: Bilingual[];
   image: string;
   repoUrl?: string;
   demoUrl?: string;
-  features: string[];
+  features: Bilingual[];
   /** Para filtrar en la sección de proyectos. */
   category?: 'agentes' | 'herramientas';
   /** Ilustración propia en lugar de una captura (proyectos sin demo pública). */
@@ -30,22 +34,22 @@ export interface Project {
 
 export interface Experience {
   id: string;
-  role: string;
+  role: Bilingual;
   company: string;
-  period: string;
+  period: Bilingual;
   /** Texto corrido: lo lee el asistente de IA como contexto. */
-  description: string;
+  description: Bilingual;
   /** Los logros, uno por línea: lo que se ve en pantalla. */
-  highlights: string[];
+  highlights: Bilingual[];
   /** Lo agéntico de este cargo, en un bloque propio con su etiqueta. */
-  agentic?: string[];
-  tags: string[];
+  agentic?: Bilingual[];
+  tags: Bilingual[];
   current?: boolean;
 }
 
 export interface Education {
   id: string;
-  degree: string;
+  degree: Bilingual;
   institution: string;
   year: string;
 }

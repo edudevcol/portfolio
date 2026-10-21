@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { INITIAL_PROJECTS, Icons } from '../constants';
-import { Project } from '../types';
+import { Project, L } from '../types';
 import ProjectModal from './ProjectModal';
 import ProjectVisual from './ProjectVisual';
 import AgenticPipeline from './AgenticPipeline';
@@ -17,7 +17,7 @@ const IDS_FLUJO = ['4', '5', '6'];
 const ID_DESTACADO = '8';
 
 const Portfolio: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const portfolioTranslations = t('portfolio');
   
   const [projects, setProjects] = useState<Project[]>([]);
@@ -143,7 +143,7 @@ const Portfolio: React.FC = () => {
 
         <AgenticPipeline
           agentes={IDS_FLUJO.map(id => projects.find(p => p.id === id)).filter((p): p is Project => !!p)}
-          onOpen={(p) => { track('project_viewed', { project: p.title }); setSelectedProject(p); }}
+          onOpen={(p) => { track('project_viewed', { project: L(p.title, 'es') }); setSelectedProject(p); }}
         />
 
         {/* Proyecto destacado: el avatar conversacional */}
@@ -152,7 +152,7 @@ const Portfolio: React.FC = () => {
           if (!destacado) return null;
           return (
             <div
-              onClick={() => { track('project_viewed', { project: destacado.title }); setSelectedProject(destacado); }}
+              onClick={() => { track('project_viewed', { project: L(destacado.title, 'es') }); setSelectedProject(destacado); }}
               className="group mb-16 grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden border border-cyan-500/25 bg-slate-800/60 hover:border-cyan-400/60 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 cursor-pointer"
             >
               <div className="h-56 lg:h-auto lg:min-h-[300px] overflow-hidden">
@@ -160,11 +160,11 @@ const Portfolio: React.FC = () => {
               </div>
               <div className="p-6 md:p-10 flex flex-col justify-center">
                 <span className="inline-block self-start text-xs font-bold tracking-[0.2em] uppercase text-cyan-300 mb-3">{portfolioTranslations.featuredEyebrow}</span>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">{destacado.title}</h3>
-                <p className="text-slate-300 leading-relaxed mb-5">{destacado.shortDescription}</p>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">{L(destacado.title, language)}</h3>
+                <p className="text-slate-300 leading-relaxed mb-5">{L(destacado.shortDescription, language)}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {destacado.technologies.slice(0, 6).map(tech => (
-                    <span key={tech} className="text-xs font-medium text-slate-300 bg-slate-900 border border-slate-700 px-2.5 py-1 rounded-md">{tech}</span>
+                  {destacado.technologies.slice(0, 6).map((tech, ti) => (
+                    <span key={ti} className="text-xs font-medium text-slate-300 bg-slate-900 border border-slate-700 px-2.5 py-1 rounded-md">{L(tech, language)}</span>
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-3">
@@ -192,7 +192,7 @@ const Portfolio: React.FC = () => {
               onClick={() => {
                 // Qué proyecto abre cada visitante — la señal de qué interesa
                 // de verdad, más útil que solo saber que entraron a la página.
-                track('project_viewed', { project: project.title });
+                track('project_viewed', { project: L(project.title, 'es') });
                 setSelectedProject(project);
               }}
               className="group bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-primary-500 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300 cursor-pointer flex flex-col relative"
@@ -230,14 +230,14 @@ const Portfolio: React.FC = () => {
               </div>
               
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">{project.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">{L(project.title, language)}</h3>
                 <p className="text-slate-400 text-sm mb-4 line-clamp-2">
-                  {project.shortDescription}
+                  {L(project.shortDescription, language)}
                 </p>
                 <div className="mt-auto flex flex-wrap gap-2">
                   {project.technologies.slice(0, 3).map((tech, idx) => (
                     <span key={idx} className="text-xs font-medium text-slate-500 bg-slate-900 px-2 py-1 rounded">
-                      {tech}
+                      {L(tech, language)}
                     </span>
                   ))}
                   {project.technologies.length > 3 && (
@@ -277,7 +277,7 @@ const Portfolio: React.FC = () => {
                           <input 
                             required
                             className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"
-                            value={editingProject.title || ''}
+                            value={L(editingProject.title || '', 'es')}
                             onChange={e => setEditingProject({...editingProject, title: e.target.value})}
                           />
                       </div>
@@ -286,7 +286,7 @@ const Portfolio: React.FC = () => {
                           <input 
                             required
                             className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"
-                            value={editingProject.shortDescription || ''}
+                            value={L(editingProject.shortDescription || '', 'es')}
                             onChange={e => setEditingProject({...editingProject, shortDescription: e.target.value})}
                           />
                       </div>
@@ -294,7 +294,7 @@ const Portfolio: React.FC = () => {
                           <label className="block text-sm font-medium text-slate-400 mb-1">Descripción Completa</label>
                           <textarea 
                             className="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white h-24"
-                            value={editingProject.fullDescription || ''}
+                            value={L(editingProject.fullDescription || '', 'es')}
                             onChange={e => setEditingProject({...editingProject, fullDescription: e.target.value})}
                           />
                       </div>

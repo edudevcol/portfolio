@@ -1,10 +1,11 @@
 import React from 'react';
 import { PROFILE, Icons } from '../constants';
+import { L } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
 import { iniciarLlamadaAvatar } from '../services/llamadaAvatar';
 
 const Hero: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const heroTranslations = t('hero');
   return (
     <section id="dashboard" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
@@ -42,7 +43,7 @@ const Hero: React.FC = () => {
         </h1>
         
         <h2 className="text-2xl md:text-3xl font-bold text-slate-300 mb-5">
-          {PROFILE.title}
+          {L(PROFILE.title, language)}
         </h2>
 
         {/* En qué me especializo, de un vistazo */}
@@ -53,15 +54,6 @@ const Hero: React.FC = () => {
             </span>
           ))}
         </div>
-
-        {/* Disponibilidad: lo primero que un reclutador de otro país quiere saber */}
-        <p className="flex items-center justify-center gap-2 mb-6 text-sm text-emerald-300">
-          <span className="relative flex h-2.5 w-2.5 shrink-0" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-          </span>
-          <span>{heroTranslations.openTo}</span>
-        </p>
 
         {/* Social Links */}
         <div className="flex justify-center gap-6 mb-8">

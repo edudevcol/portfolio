@@ -1,5 +1,6 @@
 import React from 'react';
 import { EXPERIENCE } from '../constants';
+import { L } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Check: React.FC = () => (
@@ -9,7 +10,7 @@ const Check: React.FC = () => (
 );
 
 const Experience: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const tr = t('experience');
 
   return (
@@ -50,16 +51,16 @@ const Experience: React.FC = () => {
                     {tr.current}
                   </span>
                 )}
-                <span className="px-3 py-1 text-xs font-semibold text-primary-300 bg-primary-900/30 rounded-full">{item.period}</span>
+                <span className="px-3 py-1 text-xs font-semibold text-primary-300 bg-primary-900/30 rounded-full">{L(item.period, language)}</span>
               </div>
-              <h3 className={`${item.current ? 'text-2xl' : 'text-xl'} font-bold text-white`}>{item.role}</h3>
+              <h3 className={`${item.current ? 'text-2xl' : 'text-xl'} font-bold text-white`}>{L(item.role, language)}</h3>
               <h4 className="text-primary-400 font-medium mt-1 mb-5">{item.company}</h4>
 
               <ul className="space-y-3 mb-6">
                 {item.highlights.map((h, i) => (
                   <li key={i} className="flex gap-2.5 text-sm md:text-[15px] text-slate-300 leading-relaxed">
                     <Check />
-                    <span>{h}</span>
+                    <span>{L(h, language)}</span>
                   </li>
                 ))}
               </ul>
@@ -71,7 +72,7 @@ const Experience: React.FC = () => {
                     {item.agentic.map((h, i) => (
                       <li key={i} className="flex gap-2.5 text-sm md:text-[15px] text-slate-200 leading-relaxed">
                         <svg className="w-4 h-4 mt-0.5 shrink-0 text-violet-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2l1.8 4.9L17 8.7l-4.2 3.2L14 17l-4-2.8L6 17l1.2-5.1L3 8.7l5.2-1.8L10 2z" /></svg>
-                        <span>{h}</span>
+                        <span>{L(h, language)}</span>
                       </li>
                     ))}
                   </ul>
@@ -79,8 +80,8 @@ const Experience: React.FC = () => {
               )}
 
               <div className="flex flex-wrap gap-2 mt-auto">
-                {item.tags.map((tag) => (
-                  <span key={tag} className="px-2.5 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs text-slate-300">{tag}</span>
+                {item.tags.map((tag, ti) => (
+                  <span key={ti} className="px-2.5 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs text-slate-300">{L(tag, language)}</span>
                 ))}
               </div>
             </div>

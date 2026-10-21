@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { avisarVisita } from './services/visita';
 import { LanguageProvider } from './contexts/LanguageContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -14,6 +15,9 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 
 
 function App() {
+  // Avisa de la visita (una vez por pestaña) para que Eduardo se entere por Telegram.
+  useEffect(() => { avisarVisita(); }, []);
+
   return (
     <LanguageProvider>
       <div className="relative min-h-screen bg-slate-900 text-slate-200">

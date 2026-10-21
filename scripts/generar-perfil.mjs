@@ -95,7 +95,7 @@ Contacto / Contact: ${P.contacto.email} · ${P.contacto.linkedin} · ${P.contact
 - [Clean one-column PDF resume (English)](${P.contacto.cvPdfLimpioEn})
 - [CV en PDF, versión diseñada](${P.contacto.cvPdf})
 - [Portafolio interactivo](${URL})
-- Servidor MCP del perfil (solo lectura, para agentes): ${P.contacto.mcp} — herramientas: obtener_perfil, obtener_experiencia, obtener_habilidades, listar_proyectos, obtener_formacion, evaluar_encaje_con_puesto, obtener_contacto.
+- Servidor MCP del perfil (solo lectura, para agentes): ${P.contacto.mcp} — tools: get_profile, get_experience, get_skills, list_projects, get_education, evaluate_job_fit, get_contact, ask_the_clone.
 
 ## Proyectos / Projects
 
