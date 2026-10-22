@@ -36,9 +36,6 @@ const Contact: React.FC = () => {
             </a>
           </div>
 
-          {/* Disponibilidad: al final y con tono discreto, para quien llegó hasta aquí buscando contactar */}
-          <p className="mt-10 text-sm text-slate-400">{contactTranslations.availability}</p>
-
           <div className="mt-8 pt-8 border-t border-slate-800 text-slate-500 text-sm flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-2">
             <span>&copy; {new Date().getFullYear()} {PROFILE.name}. {contactTranslations.rights}</span>
             <span className="hidden sm:inline text-slate-700" aria-hidden="true">·</span>
