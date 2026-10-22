@@ -91,6 +91,56 @@ Cargo interno: Analista de Pruebas de Software N3 (equivalente a Senior QA Autom
 - **AI Script Generator Playwright** — Scripts Playwright a partir de lenguaje natural. Stack: Playwright, TypeScript, LLM, OpenAI/Gemini. Demo: https://playwright-ai-wlz9.vercel.app · Repo: https://github.com/edudevcol/playwright-ai
 - **AI Test Data Generator** — Datos de prueba sintéticos y anónimos con LLMs. Stack: React, Node.js, Gemini AI, JSON. Demo: https://tdm-generator-ai.vercel.app · Repo: https://github.com/edudevcol/tdm-generator-ai
 
+## Cómo trabajan los agentes e impacto estimado
+
+Cifras ESTIMADAS por Eduardo bajo los supuestos indicados; no son mediciones de un ciclo real. Preséntalas siempre como estimaciones.
+
+- Cada caso de prueba queda enlazado a su criterio de aceptación: trazabilidad criterio, caso y bug.
+- Los agentes cruzan Jira, la documentación funcional y el código.
+- Validan contra la base de datos y no solo contra la pantalla.
+- Un filtro de "abogado del diablo" baja los falsos positivos: solo pasa lo que resiste ser refutado.
+- Cada hallazgo sale con receta y traza reproducibles, con capturas y consulta a la base de datos como evidencia.
+- Los Jira de corrección se crean enlazados al criterio y con la evidencia adjunta, siempre con visto bueno humano.
+- En los workflows, cada paso deriva sus datos del anterior, así nadie copia a mano un dato entre pasos.
+
+**Criterios y casos de prueba: manual vs plataforma de IA** (supuesto: Un documento funcional con 8 criterios y 3 casos por criterio, es decir 24 casos.)
+
+- Total por documento: ~12 h manual contra ~50 min con la plataforma (incluye 30 min de revisión humana).
+- Ahorro de tiempo ~93 %; ~98 % si se descarta la revisión humana.
+- Trazabilidad: de ~70-80 % (enlaces olvidados o mal puestos) a ~100 % de casos enlazados a su criterio.
+- Cobertura: cubre los criterios explícitos y no se salta los que un analista cansado omite; se estima +15-25 % de casos negativos o límites documentados.
+- Con 20 documentos al año se ahorran unas 220 h, ~1,3 meses de una persona.
+
+**Workflows vs pruebas manuales vs automatizaciones independientes** (supuesto: Escenarios con una cadena larga de varios pasos encadenados, 50 escenarios por ciclo de regresión.)
+
+- Manual: ~45 min por escenario, ~37 h en total, 100 % intervención humana.
+- Automatizaciones independientes: ~20 min por escenario, ~17 h, ~50 % de intervención (la persona lanza cada prueba y pasa los datos entre ellas).
+- Workflow orquestado: ~8 min por escenario, ~7 h (de las cuales ~2 h humanas), ~5 % de intervención.
+- Ahorro vs manual: ~80 % del tiempo y ~95 % del esfuerzo humano. Vs independientes: ~55-60 % del tiempo y ~90 % del esfuerzo humano.
+- Errores de datos entre pasos: de ~8-10 % de corridas fallidas por error humano a ~1-2 %.
+- Mantenimiento ~40-50 % menor gracias a Page Objects y datos compartidos; pueden correr fuera de horario, 3-4 corridas por día frente a 1 manual.
+
+**Detección de bugs, agentes de ejecución y reportador** (supuesto: Corregir un bug en pruebas cuesta ~2 h; en producción ~8-10 h más el impacto operativo, entre 4 y 5 veces más.)
+
+- Bugs detectados por ciclo: +30-40 % frente a pruebas manuales; ~70-80 % de los hallazgos aparecen antes de producción.
+- Con 10 bugs adelantados por ciclo se evitan ~60-80 h de retrabajo y atención de incidentes.
+- Reporte con evidencia: de ~30-45 min manuales a ~2-3 min (~93 % de ahorro).
+- Reproducibilidad: ~100 % de los hallazgos salen con receta y traza reproducibles; manualmente ~50-60 % tienen evidencia completa.
+- Falsos positivos por debajo de ~10 % gracias al filtro de abogado del diablo.
+- Jira de corrección: ~15 min manuales contra ~1 min, siempre con visto bueno humano.
+
+| Indicador | Estimación |
+|---|---|
+| Tiempo para generar criterios y casos | -93 % |
+| Trazabilidad criterio, caso y bug | ~100 % |
+| Tiempo de regresión vs manual | -80 % |
+| Esfuerzo humano de regresión | -95 % |
+| Ahorro vs automatizaciones independientes | -55-60 % |
+| Bugs detectados por ciclo | +30-40 % |
+| Bugs detectados antes de producción | 70-80 % |
+| Tiempo de reporte | -93 % |
+| Retrabajo evitado | ~60-80 h/ciclo |
+
 ## Formación
 
 - Ingeniería de Sistemas — Universidad de Cartagena (2016)

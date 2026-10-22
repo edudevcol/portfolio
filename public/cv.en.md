@@ -91,6 +91,56 @@ Internal title: Software Testing Analyst, level N3 (equivalent to Senior QA Auto
 - **AI Script Generator Playwright** — Playwright scripts from natural language. Stack: Playwright, TypeScript, LLM, OpenAI/Gemini. Demo: https://playwright-ai-wlz9.vercel.app · Repo: https://github.com/edudevcol/playwright-ai
 - **AI Test Data Generator** — Synthetic, anonymous test data with LLMs. Stack: React, Node.js, Gemini AI, JSON. Demo: https://tdm-generator-ai.vercel.app · Repo: https://github.com/edudevcol/tdm-generator-ai
 
+## How the agents work and estimated impact
+
+Figures ESTIMATED by Eduardo under the stated assumptions; they are not measurements from a real cycle. Always present them as estimates.
+
+- Every test case is linked to its acceptance criterion: criterion, case and bug stay traceable.
+- The agents cross-check Jira, the functional documentation and the code.
+- They validate against the database, not only against the screen.
+- A "devil's advocate" filter cuts false positives: only what survives refutation goes through.
+- Every finding comes with a reproducible recipe and trace, with screenshots and a database query as evidence.
+- Fix tickets in Jira are created linked to the criterion and with the evidence attached, always with human approval.
+- In the workflows, each step derives its data from the previous one, so nobody copies a value by hand between steps.
+
+**Acceptance criteria and test cases: manual vs AI platform** (assumption: One functional document with 8 criteria and 3 cases per criterion, i.e. 24 cases.)
+
+- Total per document: ~12 h manual vs ~50 min with the platform (including 30 min of human review).
+- Time saved ~93%; ~98% if human review is left out.
+- Traceability: from ~70-80% (forgotten or wrong links) to ~100% of cases linked to their criterion.
+- Coverage: it covers the explicit criteria and does not skip the ones a tired analyst misses; an estimated +15-25% of documented negative or boundary cases.
+- With 20 documents a year, about 220 h are saved, ~1.3 months of one person.
+
+**Workflows vs manual testing vs standalone automations** (assumption: Scenarios with a long chain of linked steps, 50 scenarios per regression cycle.)
+
+- Manual: ~45 min per scenario, ~37 h in total, 100% human involvement.
+- Standalone automations: ~20 min per scenario, ~17 h, ~50% involvement (a person launches each test and carries data between them).
+- Orchestrated workflow: ~8 min per scenario, ~7 h (of which ~2 h human), ~5% involvement.
+- Saving vs manual: ~80% of the time and ~95% of the human effort. Vs standalone: ~55-60% of the time and ~90% of the human effort.
+- Data errors between steps: from ~8-10% of runs failing because of human error to ~1-2%.
+- ~40-50% lower maintenance thanks to Page Objects and shared data; they can run off-hours, 3-4 runs a day vs 1 manual.
+
+**Bug detection, execution agents and reporter** (assumption: Fixing a bug in testing costs ~2 h; in production ~8-10 h plus operational impact, 4 to 5 times more.)
+
+- Bugs found per cycle: +30-40% vs manual testing; ~70-80% of findings show up before production.
+- With 10 bugs caught earlier per cycle, ~60-80 h of rework and incident handling are avoided.
+- Report with evidence: from ~30-45 min by hand to ~2-3 min (~93% saved).
+- Reproducibility: ~100% of findings come with a reproducible recipe and trace; manually ~50-60% have complete evidence.
+- False positives below ~10% thanks to the devil's advocate filter.
+- Fix ticket in Jira: ~15 min by hand vs ~1 min, always with human approval.
+
+| Indicator | Estimate |
+|---|---|
+| Time to generate criteria and cases | -93 % |
+| Criterion, case and bug traceability | ~100 % |
+| Regression time vs manual | -80 % |
+| Human regression effort | -95 % |
+| Saving vs standalone automations | -55-60 % |
+| Bugs found per cycle | +30-40 % |
+| Bugs found before production | 70-80 % |
+| Reporting time | -93 % |
+| Rework avoided | ~60-80 h/ciclo |
+
 ## Education
 
 - Systems Engineering — Universidad de Cartagena (2016)

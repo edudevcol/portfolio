@@ -12,7 +12,7 @@ const TEXTOS = {
       ['Construyo mis propias herramientas', 'plataformas con IA, generadores de datos y scripts, y un avatar conversacional conectado por MCP.'],
       ['Automatización con las herramientas del mercado', 'Playwright, Selenium, TestComplete y Cypress, además de flujos de pruebas por nodos al estilo n8n.'],
     ],
-    descargar: '{T.descargar}', unaColumna: 'Versión de una columna para sistemas de selección:', formacion: 'Formación', idiomas: 'Idiomas:', idiomasValor: 'Español (nativo) · Inglés (básico, A2)',
+    descargar: 'Descargar CV (español)', formato: 'PDF de una columna, legible por sistemas de selección.', formacion: 'Formación', idiomas: 'Idiomas:', idiomasValor: 'Español (nativo) · Inglés (básico, A2)',
   },
   en: {
     p1: <>I am a systems engineer and have been at <strong className="text-white">Sociedad Portuaria Regional de Cartagena</strong> since 2020, automating tests for business-critical web applications, with functional and REST API testing in an agile methodology.</>,
@@ -22,7 +22,7 @@ const TEXTOS = {
       ['I build my own tools', 'AI platforms, data generators and scripts, and a conversational avatar connected through MCP.'],
       ['Automation with the market-standard tools', 'Playwright, Selenium, TestComplete and Cypress, plus node-based test flows in the style of n8n.'],
     ],
-    descargar: 'Download CV', unaColumna: 'Single-column version for applicant tracking systems:', formacion: 'Education', idiomas: 'Languages:', idiomasValor: 'Spanish (native) · English (basic, A2)',
+    descargar: 'Download CV (English)', formato: 'Single-column PDF, readable by applicant tracking systems.', formacion: 'Education', idiomas: 'Languages:', idiomasValor: 'Spanish (native) · English (basic, A2)',
   },
 } as const;
 
@@ -73,21 +73,14 @@ const About: React.FC = () => {
               {/* CV download button */}
               <div className="mt-6">
                 <a
-                  href={PROFILE.cv}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={language === 'es' ? '/Eduardo_Navarro_CV_ES.pdf' : '/Eduardo_Navarro_CV_EN.pdf'}
+                  download={language === 'es' ? 'Eduardo_Navarro_CV_ES.pdf' : 'Eduardo_Navarro_CV_EN.pdf'}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" /></svg>
                   {T.descargar}
                 </a>
-                <p className="mt-3 text-sm text-slate-500">
-                  {T.unaColumna}{' '}
-                  <a href="/Eduardo_Navarro_CV_ES.pdf" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 underline underline-offset-2">{language === 'es' ? 'español' : 'Spanish'}</a>
-                  {' · '}
-                  <a href="/Eduardo_Navarro_CV_EN.pdf" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 underline underline-offset-2">English</a>
-                </p>
+                <p className="mt-2 text-xs text-slate-500">{T.formato}</p>
               </div>
           </div>
 

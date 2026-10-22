@@ -437,5 +437,215 @@
       "es": "Ciudadano colombiano, sin permiso de trabajo en España ni en la UE: busca empresas dispuestas a tramitar el permiso y a reubicarlo con su familia.",
       "en": "Colombian citizen without a work permit in Spain or the EU: looking for companies willing to sponsor the permit and relocate him with his family."
     }
+  },
+  "impacto": {
+    "aviso": {
+      "es": "Cifras ESTIMADAS por Eduardo bajo los supuestos indicados; no son mediciones de un ciclo real. Preséntalas siempre como estimaciones.",
+      "en": "Figures ESTIMATED by Eduardo under the stated assumptions; they are not measurements from a real cycle. Always present them as estimates."
+    },
+    "comoTrabajan": [
+      {
+        "es": "Cada caso de prueba queda enlazado a su criterio de aceptación: trazabilidad criterio, caso y bug.",
+        "en": "Every test case is linked to its acceptance criterion: criterion, case and bug stay traceable."
+      },
+      {
+        "es": "Los agentes cruzan Jira, la documentación funcional y el código.",
+        "en": "The agents cross-check Jira, the functional documentation and the code."
+      },
+      {
+        "es": "Validan contra la base de datos y no solo contra la pantalla.",
+        "en": "They validate against the database, not only against the screen."
+      },
+      {
+        "es": "Un filtro de \"abogado del diablo\" baja los falsos positivos: solo pasa lo que resiste ser refutado.",
+        "en": "A \"devil's advocate\" filter cuts false positives: only what survives refutation goes through."
+      },
+      {
+        "es": "Cada hallazgo sale con receta y traza reproducibles, con capturas y consulta a la base de datos como evidencia.",
+        "en": "Every finding comes with a reproducible recipe and trace, with screenshots and a database query as evidence."
+      },
+      {
+        "es": "Los Jira de corrección se crean enlazados al criterio y con la evidencia adjunta, siempre con visto bueno humano.",
+        "en": "Fix tickets in Jira are created linked to the criterion and with the evidence attached, always with human approval."
+      },
+      {
+        "es": "En los workflows, cada paso deriva sus datos del anterior, así nadie copia a mano un dato entre pasos.",
+        "en": "In the workflows, each step derives its data from the previous one, so nobody copies a value by hand between steps."
+      }
+    ],
+    "estimaciones": [
+      {
+        "id": "criterios-y-casos",
+        "titulo": {
+          "es": "Criterios y casos de prueba: manual vs plataforma de IA",
+          "en": "Acceptance criteria and test cases: manual vs AI platform"
+        },
+        "supuesto": {
+          "es": "Un documento funcional con 8 criterios y 3 casos por criterio, es decir 24 casos.",
+          "en": "One functional document with 8 criteria and 3 cases per criterion, i.e. 24 cases."
+        },
+        "lineas": [
+          {
+            "es": "Total por documento: ~12 h manual contra ~50 min con la plataforma (incluye 30 min de revisión humana).",
+            "en": "Total per document: ~12 h manual vs ~50 min with the platform (including 30 min of human review)."
+          },
+          {
+            "es": "Ahorro de tiempo ~93 %; ~98 % si se descarta la revisión humana.",
+            "en": "Time saved ~93%; ~98% if human review is left out."
+          },
+          {
+            "es": "Trazabilidad: de ~70-80 % (enlaces olvidados o mal puestos) a ~100 % de casos enlazados a su criterio.",
+            "en": "Traceability: from ~70-80% (forgotten or wrong links) to ~100% of cases linked to their criterion."
+          },
+          {
+            "es": "Cobertura: cubre los criterios explícitos y no se salta los que un analista cansado omite; se estima +15-25 % de casos negativos o límites documentados.",
+            "en": "Coverage: it covers the explicit criteria and does not skip the ones a tired analyst misses; an estimated +15-25% of documented negative or boundary cases."
+          },
+          {
+            "es": "Con 20 documentos al año se ahorran unas 220 h, ~1,3 meses de una persona.",
+            "en": "With 20 documents a year, about 220 h are saved, ~1.3 months of one person."
+          }
+        ]
+      },
+      {
+        "id": "workflows",
+        "titulo": {
+          "es": "Workflows vs pruebas manuales vs automatizaciones independientes",
+          "en": "Workflows vs manual testing vs standalone automations"
+        },
+        "supuesto": {
+          "es": "Escenarios con una cadena larga de varios pasos encadenados, 50 escenarios por ciclo de regresión.",
+          "en": "Scenarios with a long chain of linked steps, 50 scenarios per regression cycle."
+        },
+        "lineas": [
+          {
+            "es": "Manual: ~45 min por escenario, ~37 h en total, 100 % intervención humana.",
+            "en": "Manual: ~45 min per scenario, ~37 h in total, 100% human involvement."
+          },
+          {
+            "es": "Automatizaciones independientes: ~20 min por escenario, ~17 h, ~50 % de intervención (la persona lanza cada prueba y pasa los datos entre ellas).",
+            "en": "Standalone automations: ~20 min per scenario, ~17 h, ~50% involvement (a person launches each test and carries data between them)."
+          },
+          {
+            "es": "Workflow orquestado: ~8 min por escenario, ~7 h (de las cuales ~2 h humanas), ~5 % de intervención.",
+            "en": "Orchestrated workflow: ~8 min per scenario, ~7 h (of which ~2 h human), ~5% involvement."
+          },
+          {
+            "es": "Ahorro vs manual: ~80 % del tiempo y ~95 % del esfuerzo humano. Vs independientes: ~55-60 % del tiempo y ~90 % del esfuerzo humano.",
+            "en": "Saving vs manual: ~80% of the time and ~95% of the human effort. Vs standalone: ~55-60% of the time and ~90% of the human effort."
+          },
+          {
+            "es": "Errores de datos entre pasos: de ~8-10 % de corridas fallidas por error humano a ~1-2 %.",
+            "en": "Data errors between steps: from ~8-10% of runs failing because of human error to ~1-2%."
+          },
+          {
+            "es": "Mantenimiento ~40-50 % menor gracias a Page Objects y datos compartidos; pueden correr fuera de horario, 3-4 corridas por día frente a 1 manual.",
+            "en": "~40-50% lower maintenance thanks to Page Objects and shared data; they can run off-hours, 3-4 runs a day vs 1 manual."
+          }
+        ]
+      },
+      {
+        "id": "bugs-y-reporte",
+        "titulo": {
+          "es": "Detección de bugs, agentes de ejecución y reportador",
+          "en": "Bug detection, execution agents and reporter"
+        },
+        "supuesto": {
+          "es": "Corregir un bug en pruebas cuesta ~2 h; en producción ~8-10 h más el impacto operativo, entre 4 y 5 veces más.",
+          "en": "Fixing a bug in testing costs ~2 h; in production ~8-10 h plus operational impact, 4 to 5 times more."
+        },
+        "lineas": [
+          {
+            "es": "Bugs detectados por ciclo: +30-40 % frente a pruebas manuales; ~70-80 % de los hallazgos aparecen antes de producción.",
+            "en": "Bugs found per cycle: +30-40% vs manual testing; ~70-80% of findings show up before production."
+          },
+          {
+            "es": "Con 10 bugs adelantados por ciclo se evitan ~60-80 h de retrabajo y atención de incidentes.",
+            "en": "With 10 bugs caught earlier per cycle, ~60-80 h of rework and incident handling are avoided."
+          },
+          {
+            "es": "Reporte con evidencia: de ~30-45 min manuales a ~2-3 min (~93 % de ahorro).",
+            "en": "Report with evidence: from ~30-45 min by hand to ~2-3 min (~93% saved)."
+          },
+          {
+            "es": "Reproducibilidad: ~100 % de los hallazgos salen con receta y traza reproducibles; manualmente ~50-60 % tienen evidencia completa.",
+            "en": "Reproducibility: ~100% of findings come with a reproducible recipe and trace; manually ~50-60% have complete evidence."
+          },
+          {
+            "es": "Falsos positivos por debajo de ~10 % gracias al filtro de abogado del diablo.",
+            "en": "False positives below ~10% thanks to the devil's advocate filter."
+          },
+          {
+            "es": "Jira de corrección: ~15 min manuales contra ~1 min, siempre con visto bueno humano.",
+            "en": "Fix ticket in Jira: ~15 min by hand vs ~1 min, always with human approval."
+          }
+        ]
+      }
+    ],
+    "resumen": [
+      {
+        "indicador": {
+          "es": "Tiempo para generar criterios y casos",
+          "en": "Time to generate criteria and cases"
+        },
+        "mejora": "-93 %"
+      },
+      {
+        "indicador": {
+          "es": "Trazabilidad criterio, caso y bug",
+          "en": "Criterion, case and bug traceability"
+        },
+        "mejora": "~100 %"
+      },
+      {
+        "indicador": {
+          "es": "Tiempo de regresión vs manual",
+          "en": "Regression time vs manual"
+        },
+        "mejora": "-80 %"
+      },
+      {
+        "indicador": {
+          "es": "Esfuerzo humano de regresión",
+          "en": "Human regression effort"
+        },
+        "mejora": "-95 %"
+      },
+      {
+        "indicador": {
+          "es": "Ahorro vs automatizaciones independientes",
+          "en": "Saving vs standalone automations"
+        },
+        "mejora": "-55-60 %"
+      },
+      {
+        "indicador": {
+          "es": "Bugs detectados por ciclo",
+          "en": "Bugs found per cycle"
+        },
+        "mejora": "+30-40 %"
+      },
+      {
+        "indicador": {
+          "es": "Bugs detectados antes de producción",
+          "en": "Bugs found before production"
+        },
+        "mejora": "70-80 %"
+      },
+      {
+        "indicador": {
+          "es": "Tiempo de reporte",
+          "en": "Reporting time"
+        },
+        "mejora": "-93 %"
+      },
+      {
+        "indicador": {
+          "es": "Retrabajo evitado",
+          "en": "Rework avoided"
+        },
+        "mejora": "~60-80 h/ciclo"
+      }
+    ]
   }
 }

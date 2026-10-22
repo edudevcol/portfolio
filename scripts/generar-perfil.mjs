@@ -69,6 +69,20 @@ function cvMarkdown(l) {
     out.push(s);
   }
   out.push('');
+  if (P.impacto) {
+    out.push(es ? '## Cómo trabajan los agentes e impacto estimado' : '## How the agents work and estimated impact', '');
+    out.push(t(P.impacto.aviso, l), '');
+    for (const c of P.impacto.comoTrabajan) out.push('- ' + t(c, l));
+    out.push('');
+    for (const e of P.impacto.estimaciones) {
+      out.push(`**${t(e.titulo, l)}** (${es ? 'supuesto' : 'assumption'}: ${t(e.supuesto, l)})`, '');
+      for (const x of e.lineas) out.push('- ' + t(x, l));
+      out.push('');
+    }
+    out.push(`| ${es ? 'Indicador' : 'Indicator'} | ${es ? 'Estimación' : 'Estimate'} |`, '|---|---|');
+    for (const r of P.impacto.resumen) out.push(`| ${t(r.indicador, l)} | ${r.mejora} |`);
+    out.push('');
+  }
   out.push(es ? '## Formación' : '## Education', '');
   for (const f of P.formacion) out.push(`- ${t(f.titulo, l)} — ${f.institucion} (${f.fecha})`);
   out.push('', es ? '## Idiomas' : '## Languages', '');

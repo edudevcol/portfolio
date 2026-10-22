@@ -51,12 +51,12 @@ const Navbar: React.FC = () => {
             </li>
           ))}
           <li>
-            <button
-              onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
-              className="text-sm font-medium transition-all uppercase tracking-wide px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-white"
-            >
-              {language === 'es' ? '🇺🇸 EN' : '🇪🇸 ES'}
-            </button>
+            <div role="group" aria-label={language === 'es' ? 'Idioma' : 'Language'} className="inline-flex rounded-full bg-slate-800 border border-slate-700 p-0.5 text-xs font-semibold">
+              {(['es', 'en'] as const).map(l => (
+                <button key={l} type="button" onClick={() => setLanguage(l)} aria-pressed={language === l}
+                  className={`px-2.5 py-1 rounded-full uppercase tracking-wide transition-colors ${language === l ? 'bg-primary-500 text-white' : 'text-slate-400 hover:text-white'}`}>{l}</button>
+              ))}
+            </div>
           </li>
         </ul>
 
@@ -97,13 +97,12 @@ const Navbar: React.FC = () => {
               </li>
             ))}
             <li className="px-1 pt-2">
-              <button
-                type="button"
-                onClick={() => { setLanguage(language === 'es' ? 'en' : 'es'); setMenuAbierto(false); }}
-                className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 text-sm font-semibold uppercase tracking-wide"
-              >
-                {language === 'es' ? '🇺🇸 English' : '🇪🇸 Español'}
-              </button>
+              <div role="group" aria-label={language === 'es' ? 'Idioma' : 'Language'} className="flex w-full rounded-full bg-slate-800 border border-slate-700 p-0.5 text-xs font-semibold">
+              {(['es', 'en'] as const).map(l => (
+                <button key={l} type="button" onClick={() => { setLanguage(l); setMenuAbierto(false); }} aria-pressed={language === l}
+                  className={`px-2.5 py-1 rounded-full uppercase tracking-wide transition-colors ${language === l ? 'bg-primary-500 text-white' : 'text-slate-400 hover:text-white'}`}>{l}</button>
+              ))}
+            </div>
             </li>
           </ul>
         </div>
