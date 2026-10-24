@@ -100,6 +100,17 @@
       ]
     },
     {
+      "@type": "WebAPI",
+      "@id": "https://portfolio.edudev.biz/#mcp",
+      "name": "Eduardo Navarro · MCP server (profile, read-only)",
+      "url": "https://api.edudev.biz/mcp",
+      "documentation": "https://portfolio.edudev.biz/#mcp",
+      "description": "Model Context Protocol server exposing the professional profile: experience, skills, projects, education, availability and job-fit evaluation.",
+      "provider": {
+        "@id": "https://portfolio.edudev.biz/#eduardo"
+      }
+    },
+    {
       "@type": "WebSite",
       "@id": "https://portfolio.edudev.biz/#sitio",
       "url": "https://portfolio.edudev.biz/",
@@ -216,6 +227,10 @@
           <li>Clon digital (avatar con IA, conversa en voz): <a href="https://cv.edudev.biz">cv.edudev.biz</a></li>
           <li>Hoja de vida: <a href="/Eduardo_Navarro_CV_ES.pdf">PDF (es)</a> · <a href="/Eduardo_Navarro_CV_EN.pdf">PDF (en)</a> · <a href="/EDUARDONAVARRO2025_CV.pdf">PDF diseñado</a> · <a href="/cv.md">texto (es)</a> · <a href="/cv.en.md">text (en)</a> · <a href="/perfil.json">JSON</a></li>
         </ul>
+
+        <h2 id="mcp">Conecta mi perfil a tu agente (MCP) / Connect my profile to your agent (MCP)</h2>
+        <p>Mi perfil está disponible como servidor MCP de solo lectura, sin autenticación: <a href="https://api.edudev.biz/mcp">https://api.edudev.biz/mcp</a>. En los conectores de tu agente, agrega un conector personalizado con esa dirección. Herramientas: get_profile, get_experience, get_skills, list_projects, get_education, evaluate_job_fit, get_contact, ask_the_clone.</p>
+        <p lang="en">My profile is available as a read-only MCP server, no authentication: <a href="https://api.edudev.biz/mcp">https://api.edudev.biz/mcp</a>. Add it as a custom connector in your agent's connectors.</p>
 
         <h2>Resumen profesional</h2>
         <p>Desde 2020 en la Sociedad Portuaria Regional de Cartagena automatizando pruebas de aplicaciones web críticas con Selenium, Playwright y TestComplete, con pruebas funcionales y de APIs REST en metodología ágil (SCRUM). Hoy me enfoco en el Agentic QA: agentes de IA que cubren el ciclo de pruebas, además de una plataforma que genera casos de prueba y criterios de aceptación en Jira y Confluence. Como también desarrollo (React, Node.js, TypeScript), construyo mis propias herramientas.</p>

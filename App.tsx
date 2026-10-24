@@ -8,6 +8,7 @@ import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
+import ConectaMcp from './components/ConectaMcp';
 import UnifiedAssistant from './components/UnifiedAssistant';
 import FadeInSection from './components/FadeInSection';
 import { Analytics } from "@vercel/analytics/react";
@@ -43,6 +44,10 @@ function App() {
 
           <FadeInSection>
               <Portfolio />
+          </FadeInSection>
+
+          <FadeInSection>
+              <ConectaMcp />
           </FadeInSection>
 
           <FadeInSection>

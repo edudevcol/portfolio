@@ -135,6 +135,7 @@ const grafo = {
   '@context': 'https://schema.org',
   '@graph': [
     persona,
+    { '@type': 'WebAPI', '@id': URL + '#mcp', name: `${P.nombre} · MCP server (profile, read-only)`, url: P.contacto.mcp, documentation: URL + '#mcp', description: 'Model Context Protocol server exposing the professional profile: experience, skills, projects, education, availability and job-fit evaluation.', provider: { '@id': URL + '#eduardo' } },
     { '@type': 'WebSite', '@id': URL + '#sitio', url: URL, name: `${P.nombre} · Portafolio`, inLanguage: 'es', author: { '@id': URL + '#eduardo' } },
     ...P.proyectos.map((p) => ({
       '@type': 'CreativeWork', name: t(p.nombre, 'es'), description: t(p.resumen, 'es'),
@@ -161,6 +162,10 @@ ${li(`WhatsApp: <a href="https://wa.me/${P.contacto.whatsapp}">${tel}</a>`)}
 ${li(`Clon digital (avatar con IA, conversa en voz): <a href="${P.contacto.clonDigital}">${P.contacto.clonDigital.replace('https://', '')}</a>`)}
 ${li(`Hoja de vida: <a href="/Eduardo_Navarro_CV_ES.pdf">PDF (es)</a> · <a href="/Eduardo_Navarro_CV_EN.pdf">PDF (en)</a> · <a href="/EDUARDONAVARRO2025_CV.pdf">PDF diseñado</a> · <a href="/cv.md">texto (es)</a> · <a href="/cv.en.md">text (en)</a> · <a href="/perfil.json">JSON</a>`)}
         </ul>
+
+        <h2 id="mcp">Conecta mi perfil a tu agente (MCP) / Connect my profile to your agent (MCP)</h2>
+        <p>Mi perfil está disponible como servidor MCP de solo lectura, sin autenticación: <a href="${P.contacto.mcp}">${P.contacto.mcp}</a>. En los conectores de tu agente, agrega un conector personalizado con esa dirección. Herramientas: get_profile, get_experience, get_skills, list_projects, get_education, evaluate_job_fit, get_contact, ask_the_clone.</p>
+        <p lang="en">My profile is available as a read-only MCP server, no authentication: <a href="${P.contacto.mcp}">${P.contacto.mcp}</a>. Add it as a custom connector in your agent's connectors.</p>
 
         <h2>Resumen profesional</h2>
         <p>${esc(t(P.resumen, 'es'))}</p>
