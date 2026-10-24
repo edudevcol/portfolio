@@ -146,7 +146,7 @@ const grafo = {
 };
 
 const li = (s) => `          <li>${s}</li>`;
-const bloque = `      <main style="max-width:48rem;margin:0 auto;padding:2rem 1.5rem;font-family:system-ui,sans-serif;line-height:1.6;color:#e2e8f0">
+const bloque = `      <main data-estatico style="max-width:48rem;margin:0 auto;padding:2rem 1.5rem;font-family:system-ui,sans-serif;line-height:1.6;color:#e2e8f0">
         <h1>${esc(P.nombreCompleto)}</h1>
         <p><strong>${esc(t(P.titulo, 'es'))}</strong> — ${esc(P.ubicacion.ciudad)}, ${esc(P.ubicacion.pais)}</p>
         <p>${esc(t(P.posicionamiento, 'es'))}</p>

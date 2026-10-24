@@ -203,6 +203,9 @@
 }
     </script>
 <!-- PERFIL:JSONLD:FIN -->
+    <!-- El texto estático es para quien no ejecuta JavaScript (lectores, buscadores, agentes): con JS se oculta desde el primer pintado, para que no parpadee antes de que cargue la app. -->
+    <style>main[data-estatico]{display:none !important}</style>
+    <noscript><style>main[data-estatico]{display:block !important}</style></noscript>
   </head>
   <body class="bg-slate-900 text-slate-200 antialiased selection:bg-primary-500 selection:text-white">
     <div id="root">
@@ -211,7 +214,7 @@
         React lo reemplaza al montar. NO editar a mano: se genera desde public/perfil.json con `node scripts/generar-perfil.mjs`.
       -->
       <!-- PERFIL:ESTATICO:INICIO -->
-      <main style="max-width:48rem;margin:0 auto;padding:2rem 1.5rem;font-family:system-ui,sans-serif;line-height:1.6;color:#e2e8f0">
+      <main data-estatico style="max-width:48rem;margin:0 auto;padding:2rem 1.5rem;font-family:system-ui,sans-serif;line-height:1.6;color:#e2e8f0">
         <h1>Eduardo Navarro Echeverría</h1>
         <p><strong>Agentic QA Engineer · Automatización de pruebas · Full Stack Developer</strong> — Cartagena, Colombia</p>
         <p>Ingeniero de QA que construye agentes de IA para que hagan el trabajo de QA: verifican que el código cumpla lo que se pidió, ejecutan las pruebas y reportan los bugs en Jira.</p>
