@@ -75,10 +75,10 @@ Internal title: Software Testing Analyst, level N3 (equivalent to Senior QA Auto
 
 ## Skills
 
-- **Agentic AI:** Agentes de IA autónomos, MCP (Model Context Protocol), Agentes de voz en tiempo real (Gemini Live API, WebSocket), Flujos de pruebas por nodos, LLMs (Claude, Gemini, GPT, OpenAI)
-- **Test automation:** Playwright, Cypress, TestComplete, Selenium WebDriver, Postman, Pruebas funcionales, Pruebas de APIs REST
+- **Agentic AI:** Autonomous AI agents, MCP (Model Context Protocol), Real-time voice agents (Gemini Live API, WebSocket), Node-based test flows, LLMs (Claude, Gemini, GPT, OpenAI)
+- **Test automation:** Playwright, Cypress, TestComplete, Selenium WebDriver, Postman, Functional testing, REST API testing
 - **Development:** TypeScript / JavaScript, React, Node.js, Express, Java, SQL, MongoDB, Python
-- **Tools and methods:** Jira, Confluence, Git, Docker, Metodologías ágiles (SCRUM)
+- **Tools and methods:** Jira, Confluence, Git, Docker, Agile methods (SCRUM)
 
 ## Projects
 

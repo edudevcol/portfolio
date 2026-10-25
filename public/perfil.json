@@ -49,6 +49,13 @@
         "Agentes de voz en tiempo real (Gemini Live API, WebSocket)",
         "Flujos de pruebas por nodos",
         "LLMs (Claude, Gemini, GPT, OpenAI)"
+      ],
+      "itemsEn": [
+        "Autonomous AI agents",
+        "MCP (Model Context Protocol)",
+        "Real-time voice agents (Gemini Live API, WebSocket)",
+        "Node-based test flows",
+        "LLMs (Claude, Gemini, GPT, OpenAI)"
       ]
     },
     {
@@ -65,6 +72,15 @@
         "Postman",
         "Pruebas funcionales",
         "Pruebas de APIs REST"
+      ],
+      "itemsEn": [
+        "Playwright",
+        "Cypress",
+        "TestComplete",
+        "Selenium WebDriver",
+        "Postman",
+        "Functional testing",
+        "REST API testing"
       ]
     },
     {
@@ -74,6 +90,16 @@
         "en": "Development"
       },
       "items": [
+        "TypeScript / JavaScript",
+        "React",
+        "Node.js",
+        "Express",
+        "Java",
+        "SQL",
+        "MongoDB",
+        "Python"
+      ],
+      "itemsEn": [
         "TypeScript / JavaScript",
         "React",
         "Node.js",
@@ -96,6 +122,13 @@
         "Git",
         "Docker",
         "Metodologías ágiles (SCRUM)"
+      ],
+      "itemsEn": [
+        "Jira",
+        "Confluence",
+        "Git",
+        "Docker",
+        "Agile methods (SCRUM)"
       ]
     }
   ],

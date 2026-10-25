@@ -57,7 +57,7 @@ function cvMarkdown(l) {
     out.push('');
   }
   out.push(es ? '## Habilidades' : '## Skills', '');
-  for (const g of P.habilidades) out.push(`- **${t(g.nombre, l)}:** ${g.items.join(', ')}`);
+  for (const g of P.habilidades) out.push(`- **${t(g.nombre, l)}:** ${(l === 'en' && g.itemsEn ? g.itemsEn : g.items).join(', ')}`);
   out.push('');
   out.push(es ? '## Proyectos' : '## Projects', '');
   for (const p of P.proyectos) {

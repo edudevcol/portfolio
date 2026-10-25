@@ -36,13 +36,14 @@ function html(l) {
 <p class="sub">${esc(t(P.titulo, l))}</p>
 <p class="meta">${esc(P.ubicacion.ciudad)}, ${esc(P.ubicacion.pais)} | ${esc(P.contacto.email)} | ${esc(tel)}</p>
 <p class="meta">LinkedIn: ${esc(P.contacto.linkedin.replace('https://www.', ''))} | GitHub: ${esc(P.contacto.github.replace('https://', ''))} | ${esc(P.contacto.portafolio.replace('https://', ''))}</p>
+<p class="meta">${l === 'es' ? 'Clon digital (avatar con IA)' : 'Digital clone (AI avatar)'}: ${esc(P.contacto.clonDigital.replace('https://', ''))} | ${l === 'es' ? 'Mi perfil como servidor MCP (para agentes de IA)' : 'My profile as an MCP server (for AI agents)'}: ${esc(P.contacto.mcp.replace('https://', ''))}</p>
 
 <h2>${E.resumen}</h2>
 <p>${esc(t(P.posicionamiento, l))}</p>
 <p>${esc(t(P.resumen, l))}</p>
 
 <h2>${E.hab}</h2>
-${P.habilidades.map((g) => `<p><strong>${esc(t(g.nombre, l))}:</strong> ${esc(g.items.join(', '))}.</p>`).join('')}
+${P.habilidades.map((g) => `<p><strong>${esc(t(g.nombre, l))}:</strong> ${esc((l === 'en' && g.itemsEn ? g.itemsEn : g.items).join(', '))}.</p>`).join('')}
 
 <h2>${E.exp}</h2>
 ${P.experiencia.map((e) => `<h3>${esc(t(e.cargo, l))} | ${esc(e.empresa)} | ${esc(t(e.periodo, l))}</h3>
